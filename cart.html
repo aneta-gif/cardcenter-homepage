@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Your Cart</title>
+<meta name="description" content="Review your gift cards, apply a promo code, and check out securely.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA (rovnaká ako na index.html, buy.html a product.html) -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="cart-page">
+    <div class="container">
+
+      <div class="cart-heading">
+        <h1>Your Cart</h1>
+        <a href="buy.html" class="continue-link continue-link--top">&larr; Continue shopping</a>
+      </div>
+
+      <div class="cart-layout">
+
+        <!-- ĽAVÝ STĹPEC — POLOŽKY V KOŠÍKU + UPSELL -->
+        <div class="cart-main">
+
+          <!-- Banner o expirácii košíka -->
+          <div class="cart-alert">
+            <svg class="cart-alert__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M12 7.5V12L15 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="cart-alert__text">Your cart is reserved for <strong id="cartTimer">15:00</strong> — complete checkout before prices change.</span>
+          </div>
+
+          <ul class="cart-list" id="cartItemsList">
+            <li class="cart-item" data-face="50.00" data-price="46.00">
+              <div class="cart-item__media"><span class="cart-item__logo">Walmart</span></div>
+              <div class="cart-item__body">
+                <span class="cart-item__name">Walmart Gift Card</span>
+                <span class="cart-item__meta">Instant digital delivery &middot; Full balance</span>
+              </div>
+              <div class="qty-stepper" data-item-qty data-min="1">
+                <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                <span class="qty-stepper__value" data-qty-value>1</span>
+                <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+              </div>
+              <span class="cart-item__price" data-item-price>$46.00</span>
+              <button type="button" class="cart-item__remove" data-remove-item aria-label="Remove item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </li>
+
+            <li class="cart-item" data-face="25.00" data-price="22.50">
+              <div class="cart-item__media"><span class="cart-item__logo">Nike</span></div>
+              <div class="cart-item__body">
+                <span class="cart-item__name">Nike Gift Card</span>
+                <span class="cart-item__meta">Instant digital delivery &middot; Full balance</span>
+              </div>
+              <div class="qty-stepper" data-item-qty data-min="1">
+                <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                <span class="qty-stepper__value" data-qty-value>2</span>
+                <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+              </div>
+              <span class="cart-item__price" data-item-price>$45.00</span>
+              <button type="button" class="cart-item__remove" data-remove-item aria-label="Remove item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </li>
+          </ul>
+
+          <p class="cart-empty" id="cartEmptyState" hidden>Your cart is empty. <a href="buy.html">Browse gift cards</a> to get started.</p>
+
+          <!-- MAGIC UPSELL — FREQUENTLY BOUGHT TOGETHER -->
+          <div class="upsell">
+            <div class="upsell__head">
+              <h2>Frequently Bought Together <span class="upsell__head-highlight">— Highly Recommended</span></h2>
+              <p>Add these now and earn even more rewards on your order.</p>
+            </div>
+
+            <ul class="upsell__list" id="upsellList">
+              <li class="upsell__item" data-upsell data-name="Costco Gift Card" data-face="100.00" data-price="82.00">
+                <div class="cart-item__media"><span class="cart-item__logo">Costco</span></div>
+                <div class="cart-item__body">
+                  <span class="cart-item__name">Costco Gift Card &mdash; Save 18%</span>
+                  <span class="upsell__earn-badge">+ Earn 8.5% back</span>
+                </div>
+                <div class="upsell__price">
+                  <span class="upsell__price-current">$82.00</span>
+                  <span class="upsell__price-face">$100.00</span>
+                </div>
+                <button type="button" class="btn btn--primary upsell__add" data-upsell-add>+ Add</button>
+              </li>
+
+              <li class="upsell__item" data-upsell data-name="Apple Gift Card" data-face="50.00" data-price="44.00">
+                <div class="cart-item__media"><span class="cart-item__logo">Apple</span></div>
+                <div class="cart-item__body">
+                  <span class="cart-item__name">Apple Gift Card &mdash; Save 12%</span>
+                  <span class="upsell__earn-badge">+ Earn 6% back</span>
+                </div>
+                <div class="upsell__price">
+                  <span class="upsell__price-current">$44.00</span>
+                  <span class="upsell__price-face">$50.00</span>
+                </div>
+                <button type="button" class="btn btn--primary upsell__add" data-upsell-add>+ Add</button>
+              </li>
+
+              <li class="upsell__item" data-upsell data-name="DoorDash Gift Card" data-face="50.00" data-price="42.50">
+                <div class="cart-item__media"><span class="cart-item__logo">DoorDash</span></div>
+                <div class="cart-item__body">
+                  <span class="cart-item__name">DoorDash Gift Card &mdash; Save 15%</span>
+                  <span class="upsell__earn-badge">+ Earn 5% back</span>
+                </div>
+                <div class="upsell__price">
+                  <span class="upsell__price-current">$42.50</span>
+                  <span class="upsell__price-face">$50.00</span>
+                </div>
+                <button type="button" class="btn btn--primary upsell__add" data-upsell-add>+ Add</button>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- PRAVÝ STĹPEC — SÚHRN OBJEDNÁVKY (STICKY) -->
+        <aside class="order-summary" aria-label="Order summary">
+          <h2>Order Summary</h2>
+
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="summarySubtotal">$100.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Discounts</span>
+              <span id="summaryDiscount">&minus;$9.00</span>
+            </div>
+            <div class="summary-row summary-row--total">
+              <span>Total</span>
+              <span id="summaryTotal">$91.00</span>
+            </div>
+          </div>
+
+          <span class="summary-saved" id="summarySaved">You saved $9.00 today!</span>
+
+          <form class="promo" id="promoForm">
+            <input type="text" class="control promo__input" placeholder="Promo code" aria-label="Promo code" id="promoInput">
+            <button type="submit" class="btn btn--outline promo__btn">Apply</button>
+          </form>
+          <p class="promo__feedback" id="promoFeedback" aria-live="polite"></p>
+
+          <button type="button" class="btn btn--primary btn--lg btn--block btn--checkout">Proceed to Checkout</button>
+
+          <a href="buy.html" class="continue-link">Continue shopping</a>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 10. PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <form class="contact-form">
+      <h2>Get in touch</h2>
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label class="field">
+        <span>Topic</span>
+        <select name="topic" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="buy">Buying a card</option>
+          <option value="sell">Selling a card</option>
+          <option value="support">Support / complaint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">Send message</button>
+    </form>
+
+    <div class="footer__contact">
+      <div>
+        <h3>CardCenter</h3>
+        <p>Trustworthy gift cards at competitive prices.</p>
+      </div>
+      <ul class="footer__details">
+        <li>San Francisco, CA, USA</li>
+        <li>+1 (415) 555-0182</li>
+        <li>support@cardcenter.cc</li>
+      </ul>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 CardCenter. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

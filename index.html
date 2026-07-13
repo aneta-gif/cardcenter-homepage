@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Discounted Gift Cards for Individuals and Businesses</title>
+<meta name="description" content="Buy and sell discounted gift cards. Trustworthy, simple, and always at competitive prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#top" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="#sell">Sell Cards</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 2. HERO SEKCIA -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <h1 class="hero__claim">Save money. Earn miles. Let points work for you.</h1>
+      <p class="hero__sub">Buy discounted gift cards from verified sellers — fast, secure, and with no hidden fees.</p>
+
+      <form class="search" role="search" aria-label="Brand search">
+        <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="search__input" placeholder="Search a brand — e.g. Walmart, Google, Target…" aria-label="Search brand">
+        <button type="submit" class="btn btn--primary search__btn">Search</button>
+      </form>
+
+      <div class="tags" aria-label="Popular brands">
+        <a href="#brands" class="tag">Walmart</a>
+        <a href="#brands" class="tag">Amazon</a>
+        <a href="#brands" class="tag">Google Play</a>
+        <a href="#brands" class="tag">Target</a>
+        <a href="#brands" class="tag">Costco</a>
+        <a href="#brands" class="tag">DoorDash</a>
+        <a href="#brands" class="tag">Apple</a>
+      </div>
+
+      <ul class="stats">
+        <li class="stats__item">
+          <span class="stats__value">100%</span>
+          <span class="stats__label">Balance guarantee</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__value">2.4M+</span>
+          <span class="stats__label">Miles earned</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__value">1.8M+</span>
+          <span class="stats__label">Credit points</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__value">15K+</span>
+          <span class="stats__label">Number of cards</span>
+        </li>
+        <li class="stats__item">
+          <span class="stats__value">&lt;2min</span>
+          <span class="stats__label">Delivery time</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. BANNER SOCIÁLNEHO DÔKAZU -->
+  <section class="proof" aria-label="Brands that trust us">
+    <div class="container proof__inner">
+      <span class="proof__logo">Nike</span>
+      <span class="proof__logo">Costco</span>
+      <span class="proof__logo">Adidas</span>
+      <span class="proof__logo">Target</span>
+      <span class="proof__logo">Walmart</span>
+      <span class="proof__logo">Apple</span>
+      <span class="proof__logo">Google</span>
+    </div>
+  </section>
+
+  <!-- 4. MRIEŽKA VYHĽADÁVANIA PODĽA BRANDOV -->
+  <section class="section" id="brands">
+    <div class="container">
+      <div class="section__head">
+        <h2>Search by brand</h2>
+        <p>Choose from trusted, world-renowned brands.</p>
+      </div>
+
+      <div class="grid grid--brands">
+        <a href="#" class="card card--brand">
+          <span class="badge">-5%</span>
+          <span class="card__logo">Walmart</span>
+          <span class="card__name">Walmart</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="card__logo">Google</span>
+          <span class="card__name">Google Play</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="badge">-8%</span>
+          <span class="card__logo">Target</span>
+          <span class="card__name">Target</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="card__logo">Amazon</span>
+          <span class="card__name">Amazon</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="badge">-6%</span>
+          <span class="card__logo">Costco</span>
+          <span class="card__name">Costco</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="card__logo">Apple</span>
+          <span class="card__name">Apple</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="badge">-4%</span>
+          <span class="card__logo">DoorDash</span>
+          <span class="card__name">DoorDash</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="card__logo">Nike</span>
+          <span class="card__name">Nike</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="badge">-10%</span>
+          <span class="card__logo">Adidas</span>
+          <span class="card__name">Adidas</span>
+        </a>
+        <a href="#" class="card card--brand">
+          <span class="card__logo">Starbucks</span>
+          <span class="card__name">Starbucks</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. MRIEŽKA VYHĽADÁVANIA PODĽA KATEGÓRIÍ -->
+  <section class="section section--muted">
+    <div class="container">
+      <div class="section__head">
+        <h2>Search by category</h2>
+        <p>Find a card for whatever you need right now.</p>
+      </div>
+
+      <div class="grid grid--categories">
+        <a href="#" class="card card--category">
+          <span class="badge">-5%</span>
+          <span class="card__icon" aria-hidden="true">🛒</span>
+          <span class="card__name">Retail</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🍔</span>
+          <span class="card__name">Food</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="badge">Big Sale</span>
+          <span class="card__icon" aria-hidden="true">✈️</span>
+          <span class="card__name">Travel</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🎮</span>
+          <span class="card__name">Gaming</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="badge">-7%</span>
+          <span class="card__icon" aria-hidden="true">💄</span>
+          <span class="card__name">Beauty</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🏠</span>
+          <span class="card__name">Home</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. NAJPREDÁVANEJŠIE / NAJVYŠŠIA ZĽAVA -->
+  <section class="section" id="bestsellers">
+    <div class="container">
+      <div class="section__head">
+        <h2>Best sellers</h2>
+        <p>The highest-discounted cards this week.</p>
+      </div>
+
+      <div class="grid grid--best">
+        <div class="card card--best">
+          <span class="badge badge--highlight">-12%</span>
+          <span class="card__logo">Adidas</span>
+          <span class="card__name">Adidas</span>
+          <span class="card__price"><s>100 €</s> 88 €</span>
+        </div>
+        <div class="card card--best">
+          <span class="badge badge--highlight">-10%</span>
+          <span class="card__logo">Costco</span>
+          <span class="card__name">Costco</span>
+          <span class="card__price"><s>100 €</s> 90 €</span>
+        </div>
+        <div class="card card--best">
+          <span class="badge badge--highlight">-9%</span>
+          <span class="card__logo">Target</span>
+          <span class="card__name">Target</span>
+          <span class="card__price"><s>100 €</s> 91 €</span>
+        </div>
+        <div class="card card--best">
+          <span class="badge badge--highlight">-8%</span>
+          <span class="card__logo">Walmart</span>
+          <span class="card__name">Walmart</span>
+          <span class="card__price"><s>100 €</s> 92 €</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. REÁLNA ĽUDSKÁ PODPORA -->
+  <section class="section section--muted">
+    <div class="container support">
+      <div class="support__photo" role="img" aria-label="Photo of customer support team">
+        <span>Human responsive support</span>
+      </div>
+
+      <div class="support__stats">
+        <div class="support__stat">
+          <span class="support__value">&lt;5min</span>
+          <span class="support__label">Response</span>
+        </div>
+        <div class="support__stat">
+          <span class="support__value">&lt;10min</span>
+          <span class="support__label">Normal Customer Support</span>
+        </div>
+        <div class="support__stat">
+          <span class="support__value">3</span>
+          <span class="support__label">Channels</span>
+        </div>
+        <div class="support__stat">
+          <span class="support__value">24/7</span>
+          <span class="support__label">Customer Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. REFERENCIE + ČASOVÁ OS REFUNDÁCIE -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section__head">
+        <h2>What our clients say</h2>
+      </div>
+
+      <div class="grid grid--testimonials">
+        <blockquote class="quote">
+          <p>"The card arrived within two minutes, and the discount was exactly as promised."</p>
+          <cite>— Martin K.</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>"I sold them my unused cards in just a few minutes, and the money arrived the same day."</p>
+          <cite>— Zuzana P.</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>"Support genuinely responds — not a chatbot, but a real person who actually solved the issue."</p>
+          <cite>— Tomáš R.</cite>
+        </blockquote>
+      </div>
+
+      <div class="refund">
+        <h3 class="refund__title">Refund in less than 24h</h3>
+        <ol class="timeline">
+          <li class="timeline__step">
+            <span class="timeline__num">1</span>
+            <span class="timeline__label">You contact us</span>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__num">2</span>
+            <span class="timeline__label">We examine</span>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__num">3</span>
+            <span class="timeline__label">You get refund</span>
+          </li>
+        </ol>
+        <a href="#contact" class="btn btn--primary">Contact us</a>
+      </div>
+
+      <div class="case-study">
+        <div class="case-study__photo" role="img" aria-label="Photo of client John"></div>
+        <div class="case-study__body">
+          <p class="case-study__quote">"I entered the wrong PIN on my DoorDash card. I messaged support at 10:14 PM, and by 10:23 PM everything was already fixed. Unbelievable."</p>
+          <span class="case-study__author">John M., CardCenter client</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. BANNER PRE PREDAJCOV (CREDIT CARD POINTS SIDE HUSTLE) -->
+  <section class="seller" id="sell">
+    <div class="container seller__inner">
+      <h2 class="seller__title">Turn your credit card points into real earnings</h2>
+      <p class="seller__text">
+        Buy a gift card (e.g. at Costco) with your credit card and earn points. Then sell that card back to us for its
+        full value — you don't lose a cent, and the points from your bank are pure profit.
+      </p>
+
+      <ol class="seller__steps">
+        <li><span class="seller__num">1</span>Buy a gift card with your credit card and earn points</li>
+        <li><span class="seller__num">2</span>Sell the card back to us for its full value</li>
+        <li><span class="seller__num">3</span>Keep 100% of the profit from your points</li>
+      </ol>
+
+      <a href="#contact" class="btn btn--primary btn--lg">Start Selling</a>
+    </div>
+  </section>
+
+  <!-- 10. PÄTIČKA + KONTAKT -->
+  <footer class="footer" id="contact">
+    <div class="container footer__inner">
+      <form class="contact-form">
+        <h2>Get in touch</h2>
+        <label class="field">
+          <span>Name</span>
+          <input type="text" name="name" placeholder="Your name" required>
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@email.com" required>
+        </label>
+        <label class="field">
+          <span>Topic</span>
+          <select name="topic" required>
+            <option value="" disabled selected>Select a topic</option>
+            <option value="buy">Buying a card</option>
+            <option value="sell">Selling a card</option>
+            <option value="support">Support / complaint</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Message</span>
+          <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+        </label>
+        <button type="submit" class="btn btn--primary">Send message</button>
+      </form>
+
+      <div class="footer__contact">
+        <div>
+          <h3>CardCenter</h3>
+          <p>Trustworthy gift cards at competitive prices.</p>
+        </div>
+        <ul class="footer__details">
+          <li>San Francisco, CA, USA</li>
+          <li>+1 (415) 555-0182</li>
+          <li>support@cardcenter.cc</li>
+        </ul>
+        <nav class="footer__links" aria-label="Footer links">
+          <a href="buy.html">Buy Cards</a>
+          <a href="#sell">Sell Cards</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© 2026 CardCenter. All rights reserved.</span>
+    </div>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

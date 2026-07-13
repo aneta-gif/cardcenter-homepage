@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Niké Gift Card</title>
+<meta name="description" content="Buy a discounted Niké gift card. Choose an amount, earn rewards, and get instant delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA (rovnaká ako na index.html a buy.html) -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- DETAIL PRODUKTU -->
+  <section class="product-page">
+    <div class="container">
+
+      <div class="product-layout">
+
+        <!-- ĽAVÝ STĹPEC — OBRÁZOK PRODUKTU -->
+        <div class="product-media" role="img" aria-label="Niké gift card preview">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M2 9.5H22" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M6 14.5H10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- PRAVÝ STĹPEC — INFORMÁCIE A KONFIGURÁCIA NÁKUPU -->
+        <div class="product-info">
+
+          <span class="badge-protected">Protected Purchase</span>
+
+          <div class="product-title-row">
+            <h1 class="product-title">Niké Gift Card</h1>
+            <span class="product-sold">121 Sold</span>
+          </div>
+
+          <p class="product-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+            et dolore magna aliqua, redeemable in-store and online at full face value.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor"/>
+                <path d="M8 12.5L10.5 15L16 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Instant digital delivery by email</span>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor"/>
+                <path d="M8 12.5L10.5 15L16 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>100% balance guarantee</span>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor"/>
+                <path d="M8 12.5L10.5 15L16 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>24/7 human customer support</span>
+            </li>
+          </ul>
+
+          <!-- BOX S CENOU A VÝBEROM MNOŽSTVA -->
+          <div class="price-box">
+
+            <div class="price-box__row price-box__row--custom">
+              <label class="price-box__label" for="customAmount">Custom amount</label>
+              <div class="price-box__controls">
+                <div class="amount-field">
+                  <span class="amount-field__prefix">$</span>
+                  <input type="text" id="customAmount" class="amount-field__input" value="0.00" inputmode="decimal" aria-label="Custom amount in dollars">
+                </div>
+                <div class="qty-stepper" data-qty-stepper data-min="1">
+                  <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                  <span class="qty-stepper__value" data-qty-value>1</span>
+                  <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+            </div>
+
+            <ul class="price-box__list">
+              <li class="price-box__item">
+                <div class="price-box__info">
+                  <span class="price-box__price">$25.00</span>
+                  <span class="price-box__meta">Earn 4.5% &middot; 11 available</span>
+                </div>
+                <div class="qty-stepper" data-qty-stepper data-min="0">
+                  <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                  <span class="qty-stepper__value" data-qty-value>0</span>
+                  <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+                </div>
+              </li>
+              <li class="price-box__item">
+                <div class="price-box__info">
+                  <span class="price-box__price">$50.00</span>
+                  <span class="price-box__meta">Earn 5% &middot; 8 available</span>
+                </div>
+                <div class="qty-stepper" data-qty-stepper data-min="0">
+                  <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                  <span class="qty-stepper__value" data-qty-value>0</span>
+                  <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+                </div>
+              </li>
+              <li class="price-box__item">
+                <div class="price-box__info">
+                  <span class="price-box__price">$100.00</span>
+                  <span class="price-box__meta">Earn 5.5% &middot; 3 available</span>
+                </div>
+                <div class="qty-stepper" data-qty-stepper data-min="0">
+                  <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
+                  <span class="qty-stepper__value" data-qty-value>0</span>
+                  <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- AKČNÉ TLAČIDLÁ -->
+          <div class="product-actions">
+            <button type="button" class="btn btn--primary btn--lg" id="addToCartBtn">Add to cart</button>
+            <button type="button" class="btn btn--outline btn--lg">Check Balance</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ĎALŠIE PRODUKTY -->
+      <div class="section__head section__head--left">
+        <h2>More products</h2>
+      </div>
+
+      <div class="grid grid--mini">
+        <a href="product.html" class="card card--mini">
+          <span class="card__logo">Amazon</span>
+          <span class="card__name">Amazon Gift Card</span>
+          <span class="card__sold">238 sold</span>
+        </a>
+        <a href="product.html" class="card card--mini">
+          <span class="card__logo">Target</span>
+          <span class="card__name">Target Gift Card</span>
+          <span class="card__sold">176 sold</span>
+        </a>
+        <a href="product.html" class="card card--mini">
+          <span class="card__logo">Costco</span>
+          <span class="card__name">Costco Gift Card</span>
+          <span class="card__sold">94 sold</span>
+        </a>
+        <a href="product.html" class="card card--mini">
+          <span class="card__logo">Adidas</span>
+          <span class="card__name">Adidas Gift Card</span>
+          <span class="card__sold">152 sold</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODÁLNE OKNO — POTVRDENIE PRIDANIA DO KOŠÍKA -->
+  <div class="modal" id="cartModal" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+      <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
+
+      <span class="modal__icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.5 17L19 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+
+      <h2 id="cartModalTitle" class="modal__title">Added successfully</h2>
+      <p class="modal__text">Your gift card has been added to the cart.</p>
+
+      <div class="modal__actions">
+        <a href="cart.html" class="btn btn--primary">Go to cart</a>
+        <button type="button" class="btn btn--outline" data-modal-close>Continue shopping</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- 10. PÄTIČKA + KONTAKT (rovnaká ako na index.html a buy.html) -->
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <form class="contact-form">
+      <h2>Get in touch</h2>
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label class="field">
+        <span>Topic</span>
+        <select name="topic" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="buy">Buying a card</option>
+          <option value="sell">Selling a card</option>
+          <option value="support">Support / complaint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">Send message</button>
+    </form>
+
+    <div class="footer__contact">
+      <div>
+        <h3>CardCenter</h3>
+        <p>Trustworthy gift cards at competitive prices.</p>
+      </div>
+      <ul class="footer__details">
+        <li>San Francisco, CA, USA</li>
+        <li>+1 (415) 555-0182</li>
+        <li>support@cardcenter.cc</li>
+      </ul>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 CardCenter. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
