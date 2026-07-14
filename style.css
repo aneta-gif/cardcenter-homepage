@@ -2495,9 +2495,16 @@ body.modal-open {
 }
 
 .pay-method__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--c-text-darkest);
+}
+
+.pay-method__icon {
+  flex-shrink: 0;
 }
 
 /* Zľavový odznak — decentný čierny outline label vpravo v boxe */
@@ -4880,4 +4887,121 @@ body.modal-open {
   .why-cell:nth-child(3) {
     border-bottom: 1px solid var(--c-border);
   }
+}
+
+/* ==========================================================================
+   Accordion platobných metód (checkout.html)
+   ========================================================================== */
+.pay-acc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pay-opt {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: #fff;
+  overflow: hidden;
+}
+
+.pay-opt.is-open {
+  border-color: var(--c-text-darkest);
+}
+
+/* Hlavička metódy — klikateľná, name vľavo, badge + chevron vpravo */
+.pay-opt__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.pay-opt.is-open .pay-opt__head {
+  background: var(--c-bg-lightest);
+}
+
+.pay-opt__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c-text-darkest);
+  text-align: left;
+}
+
+.pay-opt__badge {
+  padding: 4px 10px;
+  border: 1px solid var(--c-text-darkest);
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-text-darkest);
+  white-space: nowrap;
+}
+
+/* Chevron indikátor — otočí sa pri otvorení */
+.pay-opt__head::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--c-mid);
+  border-bottom: 2px solid var(--c-mid);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+  margin-top: -3px;
+}
+
+.pay-opt.is-open .pay-opt__head::after {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+/* Telo — rozbaliteľný obsah */
+.pay-opt__body {
+  display: none;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--c-bg-light);
+}
+
+.pay-opt.is-open .pay-opt__body {
+  display: block;
+}
+
+/* Informačná poznámka (monochromatická, žiadna žltá) */
+.pay-note {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius);
+  background: var(--c-bg-lightest);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--c-text-mid);
+}
+
+/* Varovanie o minimálnej sume — výraznejší okraj */
+.pay-warning {
+  padding: 12px 16px;
+  margin-top: 16px;
+  border: 1px solid var(--c-text-darkest);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--c-text-dark);
+}
+
+.pay-warning strong {
+  color: var(--c-text-darkest);
+  font-weight: 700;
 }

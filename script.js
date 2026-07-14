@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPaymentDiscount();
   initBulkModal();
   initSellModal();
+  initPayAccordion();
 });
 
 // Katalóg (buy.html) — zmena platobnej metódy prepočíta „Save up to X%" na kartách.
@@ -91,6 +92,20 @@ function initBulkModal() {
         '<div class="smodal__actions"><button type="button" class="pill-btn" data-bulk-close>Close</button></div>';
     });
   }
+}
+
+// Accordion platobných metód (checkout.html) — výber metódy rozbalí jej formulár
+function initPayAccordion() {
+  const acc = document.getElementById("payAccordion");
+  if (!acc) return;
+  acc.querySelectorAll("[data-pay-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const opt = btn.closest("[data-pay-opt]");
+      acc.querySelectorAll("[data-pay-opt]").forEach((o) => {
+        o.classList.toggle("is-open", o === opt);
+      });
+    });
+  });
 }
 
 // Selling program (sell.html) — modal s kontaktným formulárom
