@@ -60,7 +60,7 @@
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
           <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <input type="text" class="search__input" placeholder="Search a brand — e.g. Walmart, Google, Target…" aria-label="Search brand">
+        <input type="text" class="search__input" placeholder="Search by brand or category" aria-label="Search by brand or category">
         <button type="submit" class="btn btn--primary search__btn">Search</button>
       </form>
 
@@ -99,16 +99,96 @@
     </div>
   </section>
 
-  <!-- 3. BANNER SOCIÁLNEHO DÔKAZU -->
-  <section class="proof" aria-label="Brands that trust us">
-    <div class="container proof__inner">
-      <span class="proof__logo">Nike</span>
-      <span class="proof__logo">Costco</span>
-      <span class="proof__logo">Adidas</span>
-      <span class="proof__logo">Target</span>
-      <span class="proof__logo">Walmart</span>
-      <span class="proof__logo">Apple</span>
-      <span class="proof__logo">Google</span>
+  <!-- 6. NAJPREDÁVANEJŠIE / NAJVYŠŠIA ZĽAVA -->
+  <section class="section" id="bestsellers">
+    <div class="container">
+      <div class="section__head">
+        <h2>Best sellers</h2>
+        <p>The highest-discounted cards this week.</p>
+      </div>
+
+      <div class="grid grid--best">
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
+            <span class="redeem__value">98%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Adidas</span>
+          <span class="card__name">Adidas</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 88 €</span><span class="card__discount">-12%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 99 percent">
+            <span class="redeem__value">99%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Costco</span>
+          <span class="card__name">Costco</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 90 €</span><span class="card__discount">-10%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
+            <span class="redeem__value">97%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Target</span>
+          <span class="card__name">Target</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
+            <span class="redeem__value">96%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Walmart</span>
+          <span class="card__name">Walmart</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
+            <span class="redeem__value">98%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Apple</span>
+          <span class="card__name">Apple</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 89 €</span><span class="card__discount">-11%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
+            <span class="redeem__value">97%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Nike</span>
+          <span class="card__name">Nike</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
+            <span class="redeem__value">96%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Amazon</span>
+          <span class="card__name">Amazon</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 93 €</span><span class="card__discount">-7%</span></div>
+        </div>
+        <div class="card card--best">
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 95 percent">
+            <span class="redeem__value">95%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 95% of buyers used this card with no issues reported.</span>
+          </span>
+
+          <span class="card__logo">Google</span>
+          <span class="card__name">Google Play</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -116,7 +196,7 @@
   <section class="section" id="brands">
     <div class="container">
       <div class="section__head">
-        <h2>Search by</h2>
+        <h2>Search by brand or category</h2>
         <div class="segmented search-toggle" role="tablist" aria-label="Search by category or brand">
           <button type="button" class="segmented__btn is-active" data-search-tab="category" role="tab" aria-selected="true">Category</button>
           <button type="button" class="segmented__btn" data-search-tab="brand" role="tab" aria-selected="false">Brand</button>
@@ -201,59 +281,6 @@
           <span class="card__logo">Starbucks</span>
           <span class="card__name">Starbucks</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. NAJPREDÁVANEJŠIE / NAJVYŠŠIA ZĽAVA -->
-  <section class="section" id="bestsellers">
-    <div class="container">
-      <div class="section__head">
-        <h2>Best sellers</h2>
-        <p>The highest-discounted cards this week.</p>
-      </div>
-
-      <div class="grid grid--best">
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
-            <span class="redeem__value">98%</span>
-            <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
-          </span>
-
-          <span class="card__logo">Adidas</span>
-          <span class="card__name">Adidas</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 88 €</span><span class="card__discount">-12%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 99 percent">
-            <span class="redeem__value">99%</span>
-            <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
-          </span>
-
-          <span class="card__logo">Costco</span>
-          <span class="card__name">Costco</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 90 €</span><span class="card__discount">-10%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
-            <span class="redeem__value">97%</span>
-            <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
-          </span>
-
-          <span class="card__logo">Target</span>
-          <span class="card__name">Target</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
-            <span class="redeem__value">96%</span>
-            <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
-          </span>
-
-          <span class="card__logo">Walmart</span>
-          <span class="card__name">Walmart</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
-        </div>
       </div>
     </div>
   </section>
