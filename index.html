@@ -22,7 +22,7 @@
         <a href="buy.html">Buy Cards</a>
         <a href="sell.html">Sell Cards</a>
         <a href="faq.html">FAQ</a>
-        <a href="#contact">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
 
       <div class="nav__actions">
@@ -64,16 +64,6 @@
         <button type="submit" class="btn btn--primary search__btn">Search</button>
       </form>
 
-      <div class="tags" aria-label="Popular brands">
-        <a href="buy.html?brand=Walmart" class="tag">Walmart</a>
-        <a href="buy.html?brand=Amazon" class="tag">Amazon</a>
-        <a href="buy.html?brand=Google%20Play" class="tag">Google Play</a>
-        <a href="buy.html?brand=Target" class="tag">Target</a>
-        <a href="buy.html?brand=Costco" class="tag">Costco</a>
-        <a href="buy.html?brand=DoorDash" class="tag">DoorDash</a>
-        <a href="buy.html?brand=Apple" class="tag">Apple</a>
-      </div>
-
       <ul class="stats">
         <li class="stats__item">
           <span class="stats__value">100%</span>
@@ -92,7 +82,7 @@
           <span class="stats__label">Number of cards</span>
         </li>
         <li class="stats__item">
-          <span class="stats__value">&lt;2min</span>
+          <span class="stats__value">&lt;5min</span>
           <span class="stats__label">Delivery time</span>
         </li>
       </ul>
@@ -107,87 +97,101 @@
         <p>The highest-discounted cards this week.</p>
       </div>
 
-      <div class="grid grid--best">
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
+      <div class="carousel" data-carousel>
+        <button type="button" class="carousel__arrow carousel__arrow--prev" data-carousel-prev aria-label="Previous cards">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="carousel__track" data-carousel-track>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 98 percent">
             <span class="redeem__value">98%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Adidas</span>
           <span class="card__name">Adidas</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 88 €</span><span class="card__discount">-12%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 99 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $88</span><span class="card__discount">-12%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 99 percent">
             <span class="redeem__value">99%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Costco</span>
           <span class="card__name">Costco</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 90 €</span><span class="card__discount">-10%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $90</span><span class="card__discount">-10%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 97 percent">
             <span class="redeem__value">97%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Target</span>
           <span class="card__name">Target</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $91</span><span class="card__discount">-9%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 96 percent">
             <span class="redeem__value">96%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Walmart</span>
           <span class="card__name">Walmart</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $92</span><span class="card__discount">-8%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 98 percent">
             <span class="redeem__value">98%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Apple</span>
           <span class="card__name">Apple</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 89 €</span><span class="card__discount">-11%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $89</span><span class="card__discount">-11%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 97 percent">
             <span class="redeem__value">97%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Nike</span>
           <span class="card__name">Nike</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $91</span><span class="card__discount">-9%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 96 percent">
             <span class="redeem__value">96%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Amazon</span>
           <span class="card__name">Amazon</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 93 €</span><span class="card__discount">-7%</span></div>
-        </div>
-        <div class="card card--best">
-          <span class="redeem" tabindex="0" aria-label="Redemption rate 95 percent">
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $93</span><span class="card__discount">-7%</span></div>
+        </a>
+        <a href="product.html" class="card card--best">
+          <span class="redeem" aria-label="Redemption rate 95 percent">
             <span class="redeem__value">95%</span>
             <span class="redeem__tip" role="tooltip">Redemption rate: 95% of buyers used this card with no issues reported.</span>
           </span>
 
           <span class="card__logo">Google</span>
           <span class="card__name">Google Play</span>
-          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
+          <div class="card__pricerow"><span class="card__price"><s>$100</s> $92</span><span class="card__discount">-8%</span></div>
+        </a>
         </div>
+
+        <button type="button" class="carousel__arrow carousel__arrow--next" data-carousel-next aria-label="Next cards">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="section__more">
+        <a href="buy.html" class="see-all">See more gift cards <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </section>
@@ -331,17 +335,20 @@
           <li class="timeline__step">
             <span class="timeline__num">1</span>
             <span class="timeline__label">You contact us</span>
+            <span class="timeline__desc">Email or call — a real person replies in under 5 minutes.</span>
           </li>
           <li class="timeline__step">
             <span class="timeline__num">2</span>
             <span class="timeline__label">We examine</span>
+            <span class="timeline__desc">We verify the card's balance and purchase history.</span>
           </li>
           <li class="timeline__step">
             <span class="timeline__num">3</span>
             <span class="timeline__label">You get refund</span>
+            <span class="timeline__desc">Full refund to your original payment method within 24 hours.</span>
           </li>
         </ol>
-        <a href="#contact" class="btn btn--primary btn--lg">Contact us</a>
+        <a href="contact.html" class="btn btn--primary btn--lg">Contact us</a>
       </div>
 
       <!-- Druhoradé: zákazníci to potvrdia -->
@@ -349,25 +356,33 @@
         <h3>And our customers confirm it</h3>
       </div>
 
+      <div class="rating-strip">
+        <span class="rating-stars" aria-hidden="true">★★★★★</span>
+        <span class="rating-text"><strong>4.8 / 5</strong> on Trustpilot &middot; 2,300+ verified reviews</span>
+      </div>
+
       <div class="grid grid--testimonials">
         <blockquote class="quote">
+          <span class="quote__stars" aria-hidden="true">★★★★★</span>
           <p>"The card arrived within two minutes, and the discount was exactly as promised."</p>
-          <cite>— Martin K.</cite>
+          <cite>— Martin K.<span class="quote__verified">Verified buyer</span></cite>
         </blockquote>
         <blockquote class="quote">
+          <span class="quote__stars" aria-hidden="true">★★★★★</span>
           <p>"I sold them my unused cards in just a few minutes, and the money arrived the same day."</p>
-          <cite>— Zuzana P.</cite>
+          <cite>— Zuzana P.<span class="quote__verified">Verified seller</span></cite>
         </blockquote>
         <blockquote class="quote">
+          <span class="quote__stars" aria-hidden="true">★★★★★</span>
           <p>"Support genuinely responds — not a chatbot, but a real person who actually solved the issue."</p>
-          <cite>— Tomáš R.</cite>
+          <cite>— Tomáš R.<span class="quote__verified">Verified buyer</span></cite>
         </blockquote>
       </div>
     </div>
   </section>
 
   <!-- BIZNIS BANNER — bulk / CardCenter for Business -->
-  <section class="biz-section">
+  <section class="biz-section" id="bulk">
     <div class="container">
       <div class="biz-banner">
         <div class="biz-banner__visual" aria-hidden="true">
@@ -409,59 +424,48 @@
   </section>
 
   <!-- 10. PÄTIČKA + KONTAKT -->
-  <footer class="footer" id="contact">
-    <div class="container footer__inner">
-      <form class="contact-form">
-        <h2>Get in touch</h2>
-        <label class="field">
-          <span>Name</span>
-          <input type="text" name="name" placeholder="Your name" required>
-        </label>
-        <label class="field">
-          <span>Email</span>
-          <input type="email" name="email" placeholder="you@email.com" required>
-        </label>
-        <label class="field">
-          <span>Topic</span>
-          <select name="topic" required>
-            <option value="" disabled selected>Select a topic</option>
-            <option value="buy">Buying a card</option>
-            <option value="sell">Selling a card</option>
-            <option value="support">Support / complaint</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <label class="field">
-          <span>Message</span>
-          <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
-        </label>
-        <button type="submit" class="btn btn--primary">Send message</button>
-      </form>
+  </main>
 
-      <div class="footer__contact">
-        <div>
-          <h3>CardCenter</h3>
-          <p>Trustworthy gift cards at competitive prices.</p>
-        </div>
-        <ul class="footer__details">
-          <li>San Francisco, CA, USA</li>
-          <li>+1 (415) 555-0182</li>
-          <li>support@cardcenter.cc</li>
-        </ul>
-        <nav class="footer__links" aria-label="Footer links">
-          <a href="buy.html">Buy Cards</a>
-          <a href="sell.html">Sell Cards</a>
-          <a href="faq.html">FAQ</a>
-        </nav>
-      </div>
+<!-- PÄTIČKA — SaaS štruktúra: brand + stĺpce odkazov + spodná lišta -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="index.html" class="footer__logo">CardCenter</a>
+      <p class="footer__tagline">Discounted gift cards from verified sellers — every card backed by CardCenter Shield.</p>
     </div>
 
-    <div class="container footer__bottom">
-      <span>© 2026 CardCenter. All rights reserved.</span>
-    </div>
-  </footer>
+    <nav class="footer__col" aria-label="Product links">
+      <h3 class="footer__heading">Product</h3>
+      <a href="buy.html">Buy Cards</a>
+      <a href="index.html#bestsellers">Best Sellers</a>
+      <a href="index.html#brands">Categories</a>
+      <a href="alerts.html">Deal Alerts</a>
+    </nav>
 
-</main>
+    <nav class="footer__col" aria-label="Sell links">
+      <h3 class="footer__heading">Sell</h3>
+      <a href="sell.html">Sell Cards</a>
+      <a href="sell.html#how-it-works">How It Works</a>
+      <a href="index.html#bulk">Bulk Buying</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Support links">
+      <h3 class="footer__heading">Support</h3>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="mailto:support@cardcenter.cc">support@cardcenter.cc</a>
+      <a href="tel:+14155550182">+1 (415) 555-0182</a>
+    </nav>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>&copy; 2026 CardCenter LLC. All rights reserved.</span>
+    <nav class="footer__legal" aria-label="Legal links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+  </div>
+</footer>
 
 <!-- Modal — kontakt pre bulk / business -->
 <div class="smodal" id="bulkModal" aria-hidden="true">

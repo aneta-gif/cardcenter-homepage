@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Shop Gift Cards V2</title>
+<meta name="description" content="Browse discounted gift cards — top picks, trending brands and categories. Save up to 20%, delivered in under 5 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy-v2.html">Buy Cards</a>
+        <a href="sell.html">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy-v2.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- SHOP V2 — à la Raise: search s overlayom, hore brand riadky, potom kategórie -->
+  <section class="shop-page">
+    <div class="container">
+
+      <div class="shop-heading">
+        <h1>Where are you shopping?</h1>
+
+        <!-- Search s overlay panelom (à la Raise): filtre + naposledy hľadané + trending -->
+        <div class="search-wrap" id="searchWrap">
+          <form class="search" role="search" aria-label="Brand search" onsubmit="return false">
+            <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input type="text" class="search__input" id="shopSearchInput" placeholder="Search for a brand&hellip;" aria-label="Search for a brand" autocomplete="off">
+            <button type="submit" class="btn btn--primary search__btn">Search</button>
+          </form>
+
+          <div class="search-panel" id="searchPanel" hidden>
+
+            <div class="search-panel__filters">
+              <div class="filter-chip" data-filter-chip>
+                <button type="button" class="filter-chip__btn" data-chip-btn aria-expanded="false">
+                  <span data-chip-label>Category</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="filter-chip__menu" data-chip-menu hidden>
+                  <button type="button" data-cat="" class="is-active">All categories</button>
+                  <button type="button" data-cat="Retail">Retail</button>
+                  <button type="button" data-cat="Food &amp; Dining">Food &amp; Dining</button>
+                  <button type="button" data-cat="Fashion &amp; Beauty">Fashion &amp; Beauty</button>
+                  <button type="button" data-cat="Electronics">Electronics</button>
+                  <button type="button" data-cat="Entertainment &amp; Travel">Entertainment &amp; Travel</button>
+                </div>
+              </div>
+
+              <div class="filter-chip" data-filter-chip>
+                <button type="button" class="filter-chip__btn" data-chip-btn aria-expanded="false">
+                  <span data-chip-label>Payment method</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="filter-chip__menu" data-chip-menu hidden>
+                  <button type="button" class="is-active">Any payment method</button>
+                  <button type="button">Credit Card</button>
+                  <button type="button">Debit Card</button>
+                  <button type="button">PayPal</button>
+                  <button type="button">Bank Transfer (+3% off)</button>
+                  <button type="button">Crypto</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="search-panel__recent" id="recentBlock">
+              <div class="search-panel__row-head">
+                <h3>Recently searched brands</h3>
+                <button type="button" class="linklike" id="recentClear">Clear all</button>
+              </div>
+              <div class="recent-chips">
+                <button type="button" class="tag" data-recent="Nike">Nike</button>
+                <button type="button" class="tag" data-recent="Costco">Costco</button>
+                <button type="button" class="tag" data-recent="Google Play">Google Play</button>
+              </div>
+            </div>
+
+            <div class="search-panel__trending">
+              <div class="search-panel__row-head">
+                <h3 id="tilesTitle">Trending</h3>
+                <a href="buy.html" class="see-all">See All 18
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="search-panel__tiles" id="searchTiles"></div>
+              <p class="search-panel__empty" id="searchEmpty" hidden>No brands match your search.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Top Picks</h2>
+          <a href="buy.html" class="see-all">See All 18 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Adidas</span>
+            <span class="brand-tile__name">Adidas</span>
+            <span class="brand-tile__meta">Save up to 12%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Costco</span>
+            <span class="brand-tile__name">Costco</span>
+            <span class="brand-tile__meta">Save up to 10%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Sephora</span>
+            <span class="brand-tile__name">Sephora</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Target</span>
+            <span class="brand-tile__name">Target</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Walmart</span>
+            <span class="brand-tile__name">Walmart</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Starbucks</span>
+            <span class="brand-tile__name">Starbucks</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Trending</h2>
+          <a href="buy.html" class="see-all">See All 10 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Nike</span>
+            <span class="brand-tile__name">Nike</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">DoorDash</span>
+            <span class="brand-tile__name">DoorDash</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Amazon</span>
+            <span class="brand-tile__name">Amazon</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Apple</span>
+            <span class="brand-tile__name">Apple</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Uber</span>
+            <span class="brand-tile__name">Uber</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Netflix</span>
+            <span class="brand-tile__name">Netflix</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Apparel</h2>
+          <a href="buy.html" class="see-all">See All 14 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Nike</span>
+            <span class="brand-tile__name">Nike</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Adidas</span>
+            <span class="brand-tile__name">Adidas</span>
+            <span class="brand-tile__meta">Save up to 12%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">GAP</span>
+            <span class="brand-tile__name">GAP</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">H&amp;M</span>
+            <span class="brand-tile__name">H&amp;M</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Old Navy</span>
+            <span class="brand-tile__name">Old Navy</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Levi's</span>
+            <span class="brand-tile__name">Levi's</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Beauty</h2>
+          <a href="buy.html" class="see-all">See All 11 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Sephora</span>
+            <span class="brand-tile__name">Sephora</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Ulta</span>
+            <span class="brand-tile__name">Ulta</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Bath &amp; Body Works</span>
+            <span class="brand-tile__name">Bath &amp; Body Works</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">The Body Shop</span>
+            <span class="brand-tile__name">The Body Shop</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">NYX</span>
+            <span class="brand-tile__name">NYX</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">MAC</span>
+            <span class="brand-tile__name">MAC</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Dining</h2>
+          <a href="buy.html" class="see-all">See All 12 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Starbucks</span>
+            <span class="brand-tile__name">Starbucks</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">DoorDash</span>
+            <span class="brand-tile__name">DoorDash</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Uber Eats</span>
+            <span class="brand-tile__name">Uber Eats</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Chipotle</span>
+            <span class="brand-tile__name">Chipotle</span>
+            <span class="brand-tile__meta">Save up to 4%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Grubhub</span>
+            <span class="brand-tile__name">Grubhub</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Panera</span>
+            <span class="brand-tile__name">Panera</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Electronics</h2>
+          <a href="buy.html" class="see-all">See All 10 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Apple</span>
+            <span class="brand-tile__name">Apple</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Best Buy</span>
+            <span class="brand-tile__name">Best Buy</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Samsung</span>
+            <span class="brand-tile__name">Samsung</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Sony</span>
+            <span class="brand-tile__name">Sony</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Dell</span>
+            <span class="brand-tile__name">Dell</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">GameStop</span>
+            <span class="brand-tile__name">GameStop</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Entertainment</h2>
+          <a href="buy.html" class="see-all">See All 12 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Netflix</span>
+            <span class="brand-tile__name">Netflix</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Google Play</span>
+            <span class="brand-tile__name">Google Play</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Spotify</span>
+            <span class="brand-tile__name">Spotify</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Hulu</span>
+            <span class="brand-tile__name">Hulu</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">AMC Theatres</span>
+            <span class="brand-tile__name">AMC Theatres</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Fandango</span>
+            <span class="brand-tile__name">Fandango</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Gaming</h2>
+          <a href="buy.html" class="see-all">See All 9 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">PlayStation</span>
+            <span class="brand-tile__name">PlayStation</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Xbox</span>
+            <span class="brand-tile__name">Xbox</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Nintendo</span>
+            <span class="brand-tile__name">Nintendo</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Steam</span>
+            <span class="brand-tile__name">Steam</span>
+            <span class="brand-tile__meta">Save up to 4%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Roblox</span>
+            <span class="brand-tile__name">Roblox</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">GameStop</span>
+            <span class="brand-tile__name">GameStop</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Groceries</h2>
+          <a href="buy.html" class="see-all">See All 8 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Costco</span>
+            <span class="brand-tile__name">Costco</span>
+            <span class="brand-tile__meta">Save up to 10%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Walmart</span>
+            <span class="brand-tile__name">Walmart</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Whole Foods</span>
+            <span class="brand-tile__name">Whole Foods</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Kroger</span>
+            <span class="brand-tile__name">Kroger</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Safeway</span>
+            <span class="brand-tile__name">Safeway</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Instacart</span>
+            <span class="brand-tile__name">Instacart</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Home &amp; Garden</h2>
+          <a href="buy.html" class="see-all">See All 13 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Home Depot</span>
+            <span class="brand-tile__name">Home Depot</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Lowe's</span>
+            <span class="brand-tile__name">Lowe's</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">IKEA</span>
+            <span class="brand-tile__name">IKEA</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Wayfair</span>
+            <span class="brand-tile__name">Wayfair</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Ace Hardware</span>
+            <span class="brand-tile__name">Ace Hardware</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Pottery Barn</span>
+            <span class="brand-tile__name">Pottery Barn</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Pets</h2>
+          <a href="buy.html" class="see-all">See All 7 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Chewy</span>
+            <span class="brand-tile__name">Chewy</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Petco</span>
+            <span class="brand-tile__name">Petco</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">PetSmart</span>
+            <span class="brand-tile__name">PetSmart</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">1-800-PetSupplies</span>
+            <span class="brand-tile__name">1-800-PetSupplies</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">BarkBox</span>
+            <span class="brand-tile__name">BarkBox</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Petland</span>
+            <span class="brand-tile__name">Petland</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Sports &amp; Outdoors</h2>
+          <a href="buy.html" class="see-all">See All 11 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Foot Locker</span>
+            <span class="brand-tile__name">Foot Locker</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">REI</span>
+            <span class="brand-tile__name">REI</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Dick's</span>
+            <span class="brand-tile__name">Dick's</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Under Armour</span>
+            <span class="brand-tile__name">Under Armour</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Columbia</span>
+            <span class="brand-tile__name">Columbia</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Bass Pro</span>
+            <span class="brand-tile__name">Bass Pro</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Travel</h2>
+          <a href="buy.html" class="see-all">See All 9 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Uber</span>
+            <span class="brand-tile__name">Uber</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Delta</span>
+            <span class="brand-tile__name">Delta</span>
+            <span class="brand-tile__meta">Save up to 4%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Airbnb</span>
+            <span class="brand-tile__name">Airbnb</span>
+            <span class="brand-tile__meta">Save up to 5%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Southwest</span>
+            <span class="brand-tile__name">Southwest</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Carnival</span>
+            <span class="brand-tile__name">Carnival</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Hotels.com</span>
+            <span class="brand-tile__name">Hotels.com</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="brand-row">
+        <div class="brand-row__head">
+          <h2>Department Stores</h2>
+          <a href="buy.html" class="see-all">See All 10 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="brand-row__grid">
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Target</span>
+            <span class="brand-tile__name">Target</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Macy's</span>
+            <span class="brand-tile__name">Macy's</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Nordstrom</span>
+            <span class="brand-tile__name">Nordstrom</span>
+            <span class="brand-tile__meta">Save up to 6%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Kohl's</span>
+            <span class="brand-tile__name">Kohl's</span>
+            <span class="brand-tile__meta">Save up to 9%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">JCPenney</span>
+            <span class="brand-tile__name">JCPenney</span>
+            <span class="brand-tile__meta">Save up to 8%</span>
+          </a>
+          <a href="product-v2.html" class="brand-tile">
+            <span class="brand-tile__art">Burlington</span>
+            <span class="brand-tile__name">Burlington</span>
+            <span class="brand-tile__meta">Save up to 7%</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Why CardCenter? -->
+      <div class="why-strip">
+        <h2>Why CardCenter?</h2>
+        <div class="why-strip__grid">
+          <div class="why-item">
+            <h3>Great savings</h3>
+            <p>Save up to 20% at brands you're already buying from — the exact discount is always shown next to the card.</p>
+          </div>
+          <div class="why-item">
+            <h3>Wide selection</h3>
+            <p>Dozens of brands in stock, and we can often source other brands for you on request.</p>
+          </div>
+          <div class="why-item">
+            <h3>Safe marketplace</h3>
+            <p>Every card is covered by CardCenter Shield — a 100% balance guarantee for 100 days.</p>
+          </div>
+          <div class="why-item">
+            <h3>Reliable team</h3>
+            <p>15+ years in the gift card industry, working with buyers of all sizes.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- PÄTIČKA — SaaS štruktúra: brand + stĺpce odkazov + spodná lišta -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="index.html" class="footer__logo">CardCenter</a>
+      <p class="footer__tagline">Discounted gift cards from verified sellers — every card backed by CardCenter Shield.</p>
+    </div>
+
+    <nav class="footer__col" aria-label="Product links">
+      <h3 class="footer__heading">Product</h3>
+      <a href="buy.html">Buy Cards</a>
+      <a href="index.html#bestsellers">Best Sellers</a>
+      <a href="index.html#brands">Categories</a>
+      <a href="alerts.html">Deal Alerts</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Sell links">
+      <h3 class="footer__heading">Sell</h3>
+      <a href="sell.html">Sell Cards</a>
+      <a href="sell.html#how-it-works">How It Works</a>
+      <a href="index.html#bulk">Bulk Buying</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Support links">
+      <h3 class="footer__heading">Support</h3>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="mailto:support@cardcenter.cc">support@cardcenter.cc</a>
+      <a href="tel:+14155550182">+1 (415) 555-0182</a>
+    </nav>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>&copy; 2026 CardCenter LLC. All rights reserved.</span>
+    <nav class="footer__legal" aria-label="Legal links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
         <a href="buy.html">Buy Cards</a>
         <a href="sell.html">Sell Cards</a>
         <a href="faq.html">FAQ</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
 
       <div class="nav__actions">
@@ -171,7 +171,7 @@
                 </span>
               </button>
               <div class="pay-opt__body">
-                <p class="pay-note">You'll confirm the payment with Apple Pay after reviewing your order. Instant delivery.</p>
+                <p class="pay-note">You'll confirm the payment with Apple Pay after reviewing your order. Delivery in under 5 minutes.</p>
               </div>
             </div>
 
@@ -237,56 +237,44 @@
 
 </main>
 
-<!-- PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
-<footer class="footer" id="contact">
-  <div class="container footer__inner">
-    <form class="contact-form">
-      <h2>Get in touch</h2>
-      <label class="field">
-        <span>Name</span>
-        <input type="text" name="name" placeholder="Your name" required>
-      </label>
-      <label class="field">
-        <span>Email</span>
-        <input type="email" name="email" placeholder="you@email.com" required>
-      </label>
-      <label class="field">
-        <span>Topic</span>
-        <select name="topic" required>
-          <option value="" disabled selected>Select a topic</option>
-          <option value="buy">Buying a card</option>
-          <option value="sell">Selling a card</option>
-          <option value="support">Support / complaint</option>
-          <option value="other">Other</option>
-        </select>
-      </label>
-      <label class="field">
-        <span>Message</span>
-        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
-      </label>
-      <button type="submit" class="btn btn--primary">Send message</button>
-    </form>
-
-    <div class="footer__contact">
-      <div>
-        <h3>CardCenter</h3>
-        <p>Trustworthy gift cards at competitive prices.</p>
-      </div>
-      <ul class="footer__details">
-        <li>San Francisco, CA, USA</li>
-        <li>+1 (415) 555-0182</li>
-        <li>support@cardcenter.cc</li>
-      </ul>
-      <nav class="footer__links" aria-label="Footer links">
-        <a href="buy.html">Buy Cards</a>
-        <a href="sell.html">Sell Cards</a>
-        <a href="faq.html">FAQ</a>
-      </nav>
+<!-- PÄTIČKA — SaaS štruktúra: brand + stĺpce odkazov + spodná lišta -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="index.html" class="footer__logo">CardCenter</a>
+      <p class="footer__tagline">Discounted gift cards from verified sellers — every card backed by CardCenter Shield.</p>
     </div>
+
+    <nav class="footer__col" aria-label="Product links">
+      <h3 class="footer__heading">Product</h3>
+      <a href="buy.html">Buy Cards</a>
+      <a href="index.html#bestsellers">Best Sellers</a>
+      <a href="index.html#brands">Categories</a>
+      <a href="alerts.html">Deal Alerts</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Sell links">
+      <h3 class="footer__heading">Sell</h3>
+      <a href="sell.html">Sell Cards</a>
+      <a href="sell.html#how-it-works">How It Works</a>
+      <a href="index.html#bulk">Bulk Buying</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Support links">
+      <h3 class="footer__heading">Support</h3>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="mailto:support@cardcenter.cc">support@cardcenter.cc</a>
+      <a href="tel:+14155550182">+1 (415) 555-0182</a>
+    </nav>
   </div>
 
   <div class="container footer__bottom">
-    <span>© 2026 CardCenter. All rights reserved.</span>
+    <span>&copy; 2026 CardCenter LLC. All rights reserved.</span>
+    <nav class="footer__legal" aria-label="Legal links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
   </div>
 </footer>
 

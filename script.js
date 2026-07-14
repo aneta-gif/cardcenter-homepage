@@ -27,7 +27,379 @@ document.addEventListener("DOMContentLoaded", () => {
   initBulkModal();
   initSellModal();
   initPayAccordion();
+  initCarousel();
+  initContactForm();
+  initShopShowMore();
+  initSearchOverlay();
+  initQuickBuy();
+  initHeroSearch();
+  initDiscountFilter();
 });
+
+// Hero search (index.html) — submit presmeruje do katalógu s predvyplneným dopytom
+function initHeroSearch() {
+  const form = document.querySelector(".hero .search");
+  if (!form) return;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = form.querySelector(".search__input").value.trim();
+    window.location.href = q ? "buy.html?brand=" + encodeURIComponent(q) : "buy.html";
+  });
+}
+
+// Discount filter (buy.html) — synchronizácia slidera a číselného inputu
+function initDiscountFilter() {
+  const slider = document.getElementById("discountSlider");
+  const input = document.getElementById("discountInput");
+  if (!slider || !input) return;
+
+  const MAX = Number(slider.max) || 20;
+
+  // Ohraničí hodnotu na rozsah 0–MAX a zaokrúhli na celé číslo
+  function clamp(val) {
+    const n = Math.round(Number(val) || 0);
+    return Math.min(MAX, Math.max(0, n));
+  }
+
+  // Dofarbí prejdenú (ľavú) časť slidera na tmavo
+  function paint(val) {
+    const pct = (val / MAX) * 100;
+    slider.style.background =
+      `linear-gradient(to right, var(--c-text-darkest) 0%, var(--c-text-darkest) ${pct}%, var(--c-border) ${pct}%, var(--c-border) 100%)`;
+  }
+
+  // Slider → input
+  slider.addEventListener("input", () => {
+    const v = clamp(slider.value);
+    input.value = v;
+    paint(v);
+  });
+
+  // Input → slider
+  input.addEventListener("input", () => {
+    const v = clamp(input.value);
+    slider.value = v;
+    paint(v);
+  });
+
+  // Po opustení poľa doplní platnú hodnotu (napr. keď zostane prázdne)
+  input.addEventListener("blur", () => {
+    const v = clamp(input.value);
+    input.value = v;
+    slider.value = v;
+    paint(v);
+  });
+
+  paint(clamp(slider.value));
+}
+
+// ==========================================================================
+// Quick buy (product-v2.html) — Continue otvorí popup s Apple Pay / kartou
+// ==========================================================================
+
+function initQuickBuy() {
+  const btn = document.getElementById("quickBuyBtn");
+  const modal = document.getElementById("quickBuyModal");
+  if (!btn || !modal) return;
+
+  const stepPay = document.getElementById("qbPay");
+  const stepProcessing = document.getElementById("qbProcessing");
+  const stepSuccess = document.getElementById("qbSuccess");
+  const cardForm = document.getElementById("qbCardForm");
+  const cardItem = cardForm.closest(".qb-method-item"); // accordion box pre New Credit Card
+  const CUSTOM_RATE = 5; // % zľava na custom amount (viď hint pod polom)
+
+  // Výber zo stránky: custom amount × qty (5 %), alebo balíčky s vlastnými
+  // sadzbami z data-rate; default $50 balíček (5 %)
+  function selection() {
+    const custom = parseFloat(document.getElementById("customAmount")?.value) || 0;
+    if (custom > 0) {
+      const qty = Number(document.querySelector(".qty-stepper--lg [data-qty-value]")?.textContent) || 1;
+      const face = custom * qty;
+      return { face, discount: (face * CUSTOM_RATE) / 100, qty };
+    }
+    let face = 0;
+    let discount = 0;
+    let qty = 0;
+    document.querySelectorAll(".price-box__item").forEach((item) => {
+      const price = parseFloat(item.querySelector(".price-box__price").textContent.replace(/[^0-9.]/g, ""));
+      const count = Number(item.querySelector("[data-qty-value]").textContent) || 0;
+      const rate = parseFloat(item.dataset.rate) || CUSTOM_RATE;
+      face += price * count;
+      discount += (price * count * rate) / 100;
+      qty += count;
+    });
+    if (face === 0) {
+      return { face: 50, discount: 50 * 0.05, qty: 1 };
+    }
+    return { face, discount, qty };
+  }
+
+  function fmt(n) {
+    return "$" + n.toFixed(2);
+  }
+
+  function goTo(step) {
+    [stepPay, stepProcessing, stepSuccess].forEach((s) => (s.hidden = s !== step));
+  }
+
+  let currentQty = 1;
+
+  function openQuickBuy() {
+    const sel = selection();
+    currentQty = sel.qty;
+    const pct = ((sel.discount / sel.face) * 100).toFixed(1).replace(/\.0$/, "");
+    document.getElementById("qbFace").textContent = fmt(sel.face);
+    document.getElementById("qbDiscountLabel").textContent = `Discount (${pct}%)`;
+    document.getElementById("qbDiscount").textContent = "−" + fmt(sel.discount);
+    document.getElementById("qbTotal").textContent = fmt(sel.face - sel.discount);
+    document.getElementById("qbCardPay").textContent = "Pay " + fmt(sel.face - sel.discount);
+    document.getElementById("qbSaved").textContent = `You're saving ${fmt(sel.discount)} today!`;
+    document.getElementById("qbSavedSuccess").textContent = `You saved ${fmt(sel.discount)} today.`;
+    cardForm.hidden = true;
+    if (cardItem) cardItem.classList.remove("is-open");
+    modal.querySelectorAll(".qb-method").forEach((m) => m.classList.remove("is-active"));
+    goTo(stepPay);
+    openModal(modal);
+  }
+
+  // Fake spracovanie platby → úspech
+  function pay() {
+    goTo(stepProcessing);
+    setTimeout(() => goTo(stepSuccess), 1400);
+  }
+
+  btn.addEventListener("click", openQuickBuy);
+
+  modal.querySelectorAll("[data-qb-close]").forEach((el) =>
+    el.addEventListener("click", () => closeModal(modal))
+  );
+
+  document.getElementById("qbApplePay").addEventListener("click", pay);
+
+  modal.querySelectorAll("[data-qb-method]").forEach((m) => {
+    m.addEventListener("click", () => {
+      const method = m.dataset.qbMethod;
+      modal.querySelectorAll(".qb-method").forEach((x) => x.classList.remove("is-active"));
+      m.classList.add("is-active");
+      if (method === "card") {
+        cardForm.hidden = !cardForm.hidden;
+        if (cardItem) cardItem.classList.toggle("is-open", !cardForm.hidden);
+      } else {
+        // Bank / ACH / Wire — v prototype rovno platia
+        cardForm.hidden = true;
+        if (cardItem) cardItem.classList.remove("is-open");
+        pay();
+      }
+    });
+  });
+
+  cardForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    pay();
+  });
+
+  // Malý linkový button — pridá výber do košíka namiesto expresnej platby
+  const addLink = document.getElementById("qbAddToCart");
+  if (addLink) {
+    addLink.addEventListener("click", () => {
+      addToCart(currentQty);
+      addLink.textContent = "Added to cart ✓";
+      setTimeout(() => {
+        closeModal(modal);
+        addLink.textContent = "Add to cart instead";
+      }, 700);
+    });
+  }
+}
+
+// ==========================================================================
+// Search overlay (buy-v2.html) — panel à la Raise: filtre, recent, trending
+// ==========================================================================
+
+const SHOP_BRANDS = [
+  { name: "Adidas", off: "8–12% off", cat: "Fashion & Beauty" },
+  { name: "Amazon", off: "4–6% off", cat: "Retail" },
+  { name: "Apple", off: "4–6% off", cat: "Electronics" },
+  { name: "Best Buy", off: "5–7% off", cat: "Electronics" },
+  { name: "Costco", off: "8–10% off", cat: "Retail" },
+  { name: "DoorDash", off: "3–5% off", cat: "Food & Dining" },
+  { name: "Google Play", off: "5–7% off", cat: "Entertainment & Travel" },
+  { name: "Home Depot", off: "4–6% off", cat: "Retail" },
+  { name: "Netflix", off: "3–5% off", cat: "Entertainment & Travel" },
+  { name: "Nike", off: "3–5% off", cat: "Fashion & Beauty" },
+  { name: "Sephora", off: "6–9% off", cat: "Fashion & Beauty" },
+  { name: "Starbucks", off: "5–8% off", cat: "Food & Dining" },
+  { name: "Target", off: "6–9% off", cat: "Retail" },
+  { name: "Uber", off: "4–6% off", cat: "Entertainment & Travel" },
+  { name: "Walmart", off: "5–8% off", cat: "Retail" },
+  { name: "Chipotle", off: "2–4% off", cat: "Food & Dining" },
+  { name: "GAP", off: "5–7% off", cat: "Fashion & Beauty" },
+  { name: "H&M", off: "4–6% off", cat: "Fashion & Beauty" },
+];
+
+// Trending = prvých 5 v poradí ako na stránke
+const SHOP_TRENDING = ["Costco", "Adidas", "Sephora", "Starbucks", "Target"];
+
+function initSearchOverlay() {
+  const wrap = document.getElementById("searchWrap");
+  if (!wrap) return;
+
+  const input = document.getElementById("shopSearchInput");
+  const panel = document.getElementById("searchPanel");
+  const tiles = document.getElementById("searchTiles");
+  const tilesTitle = document.getElementById("tilesTitle");
+  const empty = document.getElementById("searchEmpty");
+  const recentBlock = document.getElementById("recentBlock");
+  let activeCat = "";
+
+  function tileHTML(b) {
+    return `
+      <a href="product-v2.html" class="stile">
+        <span class="stile__art" aria-hidden="true">${b.name}</span>
+        <span class="stile__name">${b.name}</span>
+        <span class="stile__meta">${b.off}</span>
+      </a>`;
+  }
+
+  // Vykreslenie dlaždíc podľa query + zvolenej kategórie
+  function render() {
+    const q = input.value.trim().toLowerCase();
+    let list;
+    if (q === "" && activeCat === "") {
+      list = SHOP_TRENDING.map((n) => SHOP_BRANDS.find((b) => b.name === n));
+      tilesTitle.textContent = "Trending";
+    } else {
+      list = SHOP_BRANDS.filter(
+        (b) =>
+          (activeCat === "" || b.cat === activeCat) &&
+          (q === "" || b.name.toLowerCase().includes(q))
+      ).slice(0, 10);
+      tilesTitle.textContent = "Results";
+    }
+    tiles.innerHTML = list.map(tileHTML).join("");
+    empty.hidden = list.length > 0;
+  }
+
+  function open() {
+    panel.hidden = false;
+    render();
+  }
+
+  function close() {
+    panel.hidden = true;
+    wrap.querySelectorAll("[data-filter-chip]").forEach((c) => closeChip(c));
+  }
+
+  function closeChip(chip) {
+    chip.classList.remove("is-open");
+    chip.querySelector("[data-chip-menu]").hidden = true;
+    chip.querySelector("[data-chip-btn]").setAttribute("aria-expanded", "false");
+  }
+
+  input.addEventListener("focus", open);
+  input.addEventListener("input", render);
+
+  document.addEventListener("click", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  // Dropdown chipy (Category, Payment method)
+  wrap.querySelectorAll("[data-filter-chip]").forEach((chip) => {
+    const btn = chip.querySelector("[data-chip-btn]");
+    const menu = chip.querySelector("[data-chip-menu]");
+    const label = chip.querySelector("[data-chip-label]");
+
+    btn.addEventListener("click", () => {
+      const isOpen = chip.classList.contains("is-open");
+      wrap.querySelectorAll("[data-filter-chip]").forEach((c) => closeChip(c));
+      if (!isOpen) {
+        chip.classList.add("is-open");
+        menu.hidden = false;
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.querySelectorAll("button").forEach((item) => {
+      item.addEventListener("click", () => {
+        menu.querySelectorAll("button").forEach((i) => i.classList.remove("is-active"));
+        item.classList.add("is-active");
+        label.textContent = item.textContent;
+        if (item.hasAttribute("data-cat")) {
+          activeCat = item.getAttribute("data-cat");
+          render();
+        }
+        closeChip(chip);
+      });
+    });
+  });
+
+  // Naposledy hľadané — klik vyplní query, Clear all blok skryje
+  wrap.querySelectorAll("[data-recent]").forEach((chipBtn) => {
+    chipBtn.addEventListener("click", () => {
+      input.value = chipBtn.dataset.recent;
+      input.focus();
+      render();
+    });
+  });
+
+  const clearBtn = document.getElementById("recentClear");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      recentBlock.hidden = true;
+    });
+  }
+}
+
+// Shop V2 (buy-v2.html) — "Show more" odkryje zvyšné brandy v mriežke
+function initShopShowMore() {
+  const btn = document.getElementById("shopShowMore");
+  const grid = document.getElementById("shopGrid");
+  if (!btn || !grid) return;
+  btn.addEventListener("click", () => {
+    grid.querySelectorAll("[data-extra]").forEach((el) => {
+      el.hidden = false;
+    });
+    btn.parentElement.hidden = true;
+  });
+}
+
+// Kontaktný formulár (contact.html) — po odoslaní zobrazí potvrdenie
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const success = document.getElementById("contactSuccess");
+  if (!form || !success) return;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    form.hidden = true;
+    success.hidden = false;
+  });
+}
+
+// Carousel (index.html — Best sellers): šípky posúvajú track, na krajoch sa deaktivujú
+function initCarousel() {
+  document.querySelectorAll("[data-carousel]").forEach((root) => {
+    const track = root.querySelector("[data-carousel-track]");
+    const prev = root.querySelector("[data-carousel-prev]");
+    const next = root.querySelector("[data-carousel-next]");
+    if (!track || !prev || !next) return;
+
+    const step = () => track.clientWidth * 0.8;
+    const update = () => {
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    };
+
+    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+}
 
 // Katalóg (buy.html) — zmena platobnej metódy prepočíta „Save up to X%" na kartách.
 // Základná hodnota = maximum ("Any"); konkrétne metódy ju upravia.
@@ -318,9 +690,14 @@ function initSortTabs() {
   if (tabs.length === 0) return;
 
   tabs.forEach((tab) => {
+    tab.setAttribute("aria-pressed", tab.classList.contains("is-active") ? "true" : "false");
     tab.addEventListener("click", () => {
-      tabs.forEach((t) => t.classList.remove("is-active"));
+      tabs.forEach((t) => {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-pressed", "false");
+      });
       tab.classList.add("is-active");
+      tab.setAttribute("aria-pressed", "true");
     });
   });
 
@@ -1106,7 +1483,7 @@ function initOrderDetail() {
     bottomBlock = `
       <div class="report-box" id="report">
         <h2 class="report-box__title">Report an issue</h2>
-        <p class="report-box__text">Something wrong with your card? Describe what happened and we'll make it right within your 100-day guarantee.</p>
+        <p class="report-box__text">Something wrong with your card? Describe what happened and we'll make it right within your 100-day CardCenter Shield guarantee.</p>
         <textarea class="report-box__input" id="reportMessage" rows="4" placeholder="Tell us what's wrong with your card…"></textarea>
         <div class="report-box__foot">
           <label class="report-box__attach">${ATTACH_ICON}<span>Add attachment</span><input type="file" hidden></label>
@@ -1118,7 +1495,7 @@ function initOrderDetail() {
       <div class="order-guarantee order-guarantee--expired">
         <div>
           <p class="order-guarantee__title">Guarantee expired</p>
-          <p class="order-guarantee__text">The 100-day guarantee window for this order has passed.</p>
+          <p class="order-guarantee__text">The 100-day CardCenter Shield window for this order has passed.</p>
         </div>
       </div>`;
   }
@@ -1848,7 +2225,7 @@ function appendUpsellItemToCart(upsellItem) {
     <div class="cart-item__media"><span class="cart-item__logo">${logo}</span></div>
     <div class="cart-item__body">
       <span class="cart-item__name">${name}</span>
-      <span class="cart-item__meta">Instant digital delivery &middot; Full balance</span>
+      <span class="cart-item__meta">Delivery in under 5 minutes &middot; Full balance</span>
     </div>
     <div class="qty-stepper" data-item-qty data-min="1">
       <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
