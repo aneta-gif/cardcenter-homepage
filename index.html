@@ -21,7 +21,7 @@
       <nav class="nav__links" aria-label="Main navigation">
         <a href="buy.html">Buy Cards</a>
         <a href="#sell">Sell Cards</a>
-        <a href="#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -112,15 +112,50 @@
     </div>
   </section>
 
-  <!-- 4. MRIEŽKA VYHĽADÁVANIA PODĽA BRANDOV -->
+  <!-- 4. VYHĽADÁVANIE — prepínač medzi kategóriami a brandmi (kategórie default) -->
   <section class="section" id="brands">
     <div class="container">
       <div class="section__head">
-        <h2>Search by brand</h2>
-        <p>Choose from trusted, world-renowned brands.</p>
+        <h2>Search by</h2>
+        <div class="segmented search-toggle" role="tablist" aria-label="Search by category or brand">
+          <button type="button" class="segmented__btn is-active" data-search-tab="category" role="tab" aria-selected="true">Category</button>
+          <button type="button" class="segmented__btn" data-search-tab="brand" role="tab" aria-selected="false">Brand</button>
+        </div>
       </div>
 
-      <div class="grid grid--brands">
+      <!-- Kategórie (predvolené) -->
+      <div class="grid grid--categories" data-search-panel="category">
+        <a href="#" class="card card--category">
+          <span class="badge">-5%</span>
+          <span class="card__icon" aria-hidden="true">🛒</span>
+          <span class="card__name">Retail</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🍔</span>
+          <span class="card__name">Food</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="badge">Big Sale</span>
+          <span class="card__icon" aria-hidden="true">✈️</span>
+          <span class="card__name">Travel</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🎮</span>
+          <span class="card__name">Gaming</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="badge">-7%</span>
+          <span class="card__icon" aria-hidden="true">💄</span>
+          <span class="card__name">Beauty</span>
+        </a>
+        <a href="#" class="card card--category">
+          <span class="card__icon" aria-hidden="true">🏠</span>
+          <span class="card__name">Home</span>
+        </a>
+      </div>
+
+      <!-- Brandy -->
+      <div class="grid grid--brands" data-search-panel="brand" hidden>
         <a href="#" class="card card--brand">
           <span class="badge">-5%</span>
           <span class="card__logo">Walmart</span>
@@ -170,46 +205,6 @@
     </div>
   </section>
 
-  <!-- 5. MRIEŽKA VYHĽADÁVANIA PODĽA KATEGÓRIÍ -->
-  <section class="section section--muted">
-    <div class="container">
-      <div class="section__head">
-        <h2>Search by category</h2>
-        <p>Find a card for whatever you need right now.</p>
-      </div>
-
-      <div class="grid grid--categories">
-        <a href="#" class="card card--category">
-          <span class="badge">-5%</span>
-          <span class="card__icon" aria-hidden="true">🛒</span>
-          <span class="card__name">Retail</span>
-        </a>
-        <a href="#" class="card card--category">
-          <span class="card__icon" aria-hidden="true">🍔</span>
-          <span class="card__name">Food</span>
-        </a>
-        <a href="#" class="card card--category">
-          <span class="badge">Big Sale</span>
-          <span class="card__icon" aria-hidden="true">✈️</span>
-          <span class="card__name">Travel</span>
-        </a>
-        <a href="#" class="card card--category">
-          <span class="card__icon" aria-hidden="true">🎮</span>
-          <span class="card__name">Gaming</span>
-        </a>
-        <a href="#" class="card card--category">
-          <span class="badge">-7%</span>
-          <span class="card__icon" aria-hidden="true">💄</span>
-          <span class="card__name">Beauty</span>
-        </a>
-        <a href="#" class="card card--category">
-          <span class="card__icon" aria-hidden="true">🏠</span>
-          <span class="card__name">Home</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- 6. NAJPREDÁVANEJŠIE / NAJVYŠŠIA ZĽAVA -->
   <section class="section" id="bestsellers">
     <div class="container">
@@ -220,28 +215,44 @@
 
       <div class="grid grid--best">
         <div class="card card--best">
-          <span class="badge badge--highlight">-12%</span>
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 98 percent">
+            <span class="redeem__value">98%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Adidas</span>
           <span class="card__name">Adidas</span>
-          <span class="card__price"><s>100 €</s> 88 €</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 88 €</span><span class="card__discount">-12%</span></div>
         </div>
         <div class="card card--best">
-          <span class="badge badge--highlight">-10%</span>
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 99 percent">
+            <span class="redeem__value">99%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Costco</span>
           <span class="card__name">Costco</span>
-          <span class="card__price"><s>100 €</s> 90 €</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 90 €</span><span class="card__discount">-10%</span></div>
         </div>
         <div class="card card--best">
-          <span class="badge badge--highlight">-9%</span>
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 97 percent">
+            <span class="redeem__value">97%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Target</span>
           <span class="card__name">Target</span>
-          <span class="card__price"><s>100 €</s> 91 €</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 91 €</span><span class="card__discount">-9%</span></div>
         </div>
         <div class="card card--best">
-          <span class="badge badge--highlight">-8%</span>
+          <span class="redeem" tabindex="0" aria-label="Redemption rate 96 percent">
+            <span class="redeem__value">96%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 96% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Walmart</span>
           <span class="card__name">Walmart</span>
-          <span class="card__price"><s>100 €</s> 92 €</span>
+          <div class="card__pricerow"><span class="card__price"><s>100 €</s> 92 €</span><span class="card__discount">-8%</span></div>
         </div>
       </div>
     </div>
@@ -251,35 +262,64 @@
   <section class="section section--muted">
     <div class="container support">
       <div class="support__photo" role="img" aria-label="Photo of customer support team">
-        <span>Human responsive support</span>
+        <span>Real people, ready to help</span>
       </div>
 
-      <div class="support__stats">
-        <div class="support__stat">
-          <span class="support__value">&lt;5min</span>
-          <span class="support__label">Response</span>
+      <div class="support__content">
+        <div class="support__head">
+          <h2>Human responsive support</h2>
+          <p>We're here 24/7 — and it's real people, not a bot, resolving your issues. Reach us any time and talk to someone who actually solves the problem.</p>
         </div>
-        <div class="support__stat">
-          <span class="support__value">&lt;10min</span>
-          <span class="support__label">Normal Customer Support</span>
-        </div>
-        <div class="support__stat">
-          <span class="support__value">3</span>
-          <span class="support__label">Channels</span>
-        </div>
-        <div class="support__stat">
-          <span class="support__value">24/7</span>
-          <span class="support__label">Customer Support</span>
+
+        <div class="support__stats">
+          <div class="support__stat">
+            <span class="support__value">&lt;5min</span>
+            <span class="support__label">Response</span>
+          </div>
+          <div class="support__stat">
+            <span class="support__value">&lt;10min</span>
+            <span class="support__label">Normal Customer Support</span>
+          </div>
+          <div class="support__stat">
+            <span class="support__value">3</span>
+            <span class="support__label">Channels</span>
+          </div>
+          <div class="support__stat">
+            <span class="support__value">24/7</span>
+            <span class="support__label">Customer Support</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. REFERENCIE + ČASOVÁ OS REFUNDÁCIE -->
+  <!-- 8. REFUND (primárny) + POTVRDENIE OD ZÁKAZNÍKOV -->
   <section class="section" id="testimonials">
     <div class="container">
-      <div class="section__head">
-        <h2>What our clients say</h2>
+
+      <!-- Primárny: Refund so zvýraznenou timeline -->
+      <div class="refund refund--primary">
+        <h2 class="refund__title">Refund in less than 24h</h2>
+        <ol class="timeline timeline--lg">
+          <li class="timeline__step">
+            <span class="timeline__num">1</span>
+            <span class="timeline__label">You contact us</span>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__num">2</span>
+            <span class="timeline__label">We examine</span>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__num">3</span>
+            <span class="timeline__label">You get refund</span>
+          </li>
+        </ol>
+        <a href="#contact" class="btn btn--primary btn--lg">Contact us</a>
+      </div>
+
+      <!-- Druhoradé: zákazníci to potvrdia -->
+      <div class="section__head section__head--sub">
+        <h3>And our customers confirm it</h3>
       </div>
 
       <div class="grid grid--testimonials">
@@ -296,32 +336,28 @@
           <cite>— Tomáš R.</cite>
         </blockquote>
       </div>
+    </div>
+  </section>
 
-      <div class="refund">
-        <h3 class="refund__title">Refund in less than 24h</h3>
-        <ol class="timeline">
-          <li class="timeline__step">
-            <span class="timeline__num">1</span>
-            <span class="timeline__label">You contact us</span>
-          </li>
-          <li class="timeline__step">
-            <span class="timeline__num">2</span>
-            <span class="timeline__label">We examine</span>
-          </li>
-          <li class="timeline__step">
-            <span class="timeline__num">3</span>
-            <span class="timeline__label">You get refund</span>
-          </li>
-        </ol>
-        <a href="#contact" class="btn btn--primary">Contact us</a>
-      </div>
-
-      <div class="case-study">
-        <div class="case-study__photo" role="img" aria-label="Photo of client John"></div>
-        <div class="case-study__body">
-          <p class="case-study__quote">"I entered the wrong PIN on my DoorDash card. I messaged support at 10:14 PM, and by 10:23 PM everything was already fixed. Unbelievable."</p>
-          <span class="case-study__author">John M., CardCenter client</span>
+  <!-- BIZNIS BANNER — bulk / CardCenter for Business -->
+  <section class="biz-section">
+    <div class="container">
+      <div class="biz-banner">
+        <div class="biz-banner__visual" aria-hidden="true">
+          <span class="biz-visual__card"></span>
+          <span class="biz-visual__card"></span>
+          <span class="biz-visual__card"></span>
         </div>
+        <div class="biz-banner__text">
+          <span class="biz-banner__title">Bulk buying program</span>
+          <p class="biz-banner__sub">Buy gift cards in bulk and unlock extra savings — built for resellers and teams.</p>
+          <ul class="biz-banner__benefits">
+            <li>Extra 3% off with Wire, ACH &amp; bank debit</li>
+            <li>Automatic Google Sheets inventory sync</li>
+            <li>Dedicated account manager &amp; priority support</li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn--primary biz-banner__cta" id="bulkCta">Apply for Bulk</button>
       </div>
     </div>
   </section>
@@ -388,7 +424,7 @@
         <nav class="footer__links" aria-label="Footer links">
           <a href="buy.html">Buy Cards</a>
           <a href="#sell">Sell Cards</a>
-          <a href="#faq">FAQ</a>
+          <a href="faq.html">FAQ</a>
         </nav>
       </div>
     </div>
@@ -399,6 +435,27 @@
   </footer>
 
 </main>
+
+<!-- Modal — kontakt pre bulk / business -->
+<div class="smodal" id="bulkModal" aria-hidden="true">
+  <div class="smodal__overlay" data-bulk-close></div>
+  <div class="smodal__box" role="dialog" aria-modal="true" aria-labelledby="bulkTitle">
+    <button type="button" class="smodal__close" data-bulk-close aria-label="Close">&times;</button>
+    <div id="bulkContent">
+      <h2 class="smodal__title" id="bulkTitle">Contact Sales</h2>
+      <p class="smodal__text">Tell us about your bulk needs and we'll get back to you within one business day.</p>
+      <form class="smodal__form" id="bulkForm">
+        <label class="field field--full"><span>Name</span><input type="text" class="control" name="name" placeholder="Your name" required></label>
+        <label class="field field--full"><span>Email</span><input type="email" class="control" name="email" placeholder="you@company.com" required></label>
+        <label class="field field--full"><span>Message</span><textarea class="control" name="message" rows="4" placeholder="Volumes, brands, payment method…" required></textarea></label>
+        <div class="smodal__actions">
+          <button type="button" class="pill-btn pill-btn--ghost" data-bulk-close>Cancel</button>
+          <button type="submit" class="pill-btn">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

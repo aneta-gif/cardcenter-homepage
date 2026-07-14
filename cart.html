@@ -21,7 +21,7 @@
       <nav class="nav__links" aria-label="Main navigation">
         <a href="buy.html">Buy Cards</a>
         <a href="index.html#sell">Sell Cards</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
         <a href="index.html#contact">Contact</a>
       </nav>
 
@@ -200,6 +200,127 @@
     </div>
   </section>
 
+  <!-- AUTENTIFIKAČNÝ MODÁL — Prihlásenie / Registrácia (prémiový čierno-biely dizajn) -->
+  <div class="modal modal--auth" id="authModal" data-auth-mode="login" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box auth" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
+
+      <!-- Hodnotová hlavička — vysvetľuje, prečo je účet potrebný -->
+      <div class="auth__header">
+        <span class="auth__lock" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="#fff" stroke-width="1.7"/>
+            <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <h2 id="authTitle" class="auth__title">Account Required to Checkout</h2>
+        <p class="auth__text">Creating an account is required to securely deliver your digital gift cards, track your purchase history, and unlock exclusive rewards.</p>
+      </div>
+
+      <!-- Prepínač medzi Prihlásením a Registráciou -->
+      <div class="auth__toggle" role="tablist" aria-label="Authentication mode">
+        <button type="button" class="auth__toggle-btn is-active" data-auth-switch="login" role="tab" aria-selected="true">Login</button>
+        <button type="button" class="auth__toggle-btn" data-auth-switch="signup" role="tab" aria-selected="false">Sign Up</button>
+      </div>
+
+      <!-- Formulár — zdieľané polia (Email, Password) sú vždy viditeľné,
+           polia označené .auth-signup-field sa plynulo rozbalia iba pri registrácii -->
+      <form class="auth-form" id="authForm" novalidate>
+
+        <!-- Meno (iba registrácia) -->
+        <label class="field auth-field auth-signup-field">
+          <span>Name</span>
+          <input type="text" name="name" placeholder="Your full name" autocomplete="name">
+        </label>
+
+        <!-- Email (zdieľané) -->
+        <label class="field auth-field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@email.com" autocomplete="email">
+        </label>
+
+        <!-- Telefónne číslo (iba registrácia) -->
+        <label class="field auth-field auth-signup-field">
+          <span>Phone Number</span>
+          <input type="tel" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+          <span class="field__hint">We'll use this number to help keep your account secure by sending verification texts or calls when needed.</span>
+        </label>
+
+        <!-- Heslo (zdieľané) -->
+        <label class="field auth-field">
+          <span>Password</span>
+          <div class="pwd-field">
+            <input type="password" name="password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="pwd-toggle" data-pwd-toggle aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <!-- Odkaz na obnovu hesla — viditeľný iba v režime prihlásenia -->
+        <a href="#" class="auth__forgot auth-login-field">Forgot password?</a>
+
+        <!-- Potvrdenie hesla (iba registrácia) -->
+        <label class="field auth-field auth-signup-field">
+          <span>Confirm Password</span>
+          <div class="pwd-field">
+            <input type="password" name="confirmPassword" placeholder="••••••••" autocomplete="new-password">
+            <button type="button" class="pwd-toggle" data-pwd-toggle aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <!-- Upozornenia — moderný vlastný checkbox (iba registrácia) -->
+        <label class="auth-check auth-signup-field">
+          <input type="checkbox" name="notifications">
+          <span class="auth-check__box" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12.5L9.5 17L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="auth-check__label">Send me email alerts when new deals are posted</span>
+        </label>
+
+        <!-- Zdroj odporúčania (iba registrácia) -->
+        <label class="field auth-field auth-signup-field">
+          <span>Referred by</span>
+          <input type="text" name="referredBy" placeholder="Friend, social media, search…">
+          <span class="field__hint">Please tell us how you heard about CardCenter.</span>
+        </label>
+
+        <!-- Hlavné CTA — plná šírka, čierne pill tlačidlo -->
+        <button type="submit" class="auth__submit" id="authSubmit">Log In &amp; Continue</button>
+      </form>
+
+      <p class="auth__legal">By continuing you agree to our Terms of Service and Privacy Policy.</p>
+
+      <!-- Verifikačný krok — zobrazí sa až po kliknutí na "Continue to Verification" -->
+      <div class="auth-verify" aria-hidden="true">
+        <span class="auth__lock" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3L5 6v5.5c0 4.2 2.9 7.4 7 8.5 4.1-1.1 7-4.3 7-8.5V6l-7-3Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <h2 class="auth__title">Account Verification</h2>
+        <p class="auth__text">To ensure maximum security and protect your digital assets, we require a quick verification setup. This adds an extra layer of protection to your account and prevents unauthorized access.</p>
+
+        <!-- Placeholder QR kódu — čisto CSS, simuluje reálny QR kód -->
+        <div class="auth-qr" aria-hidden="true">
+          <div class="auth-qr__grid">
+            <span class="auth-qr__eye auth-qr__eye--tl"></span>
+            <span class="auth-qr__eye auth-qr__eye--tr"></span>
+            <span class="auth-qr__eye auth-qr__eye--bl"></span>
+          </div>
+        </div>
+
+        <button type="button" class="auth__submit" id="authVerifyBtn">Continue</button>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- 10. PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
@@ -245,7 +366,7 @@
       <nav class="footer__links" aria-label="Footer links">
         <a href="buy.html">Buy Cards</a>
         <a href="index.html#sell">Sell Cards</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
       </nav>
     </div>
   </div>

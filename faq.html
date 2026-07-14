@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — FAQ</title>
+<meta name="description" content="Buying, selling, verification, the guarantee, and payments — in plain language.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA (rovnaká ako na ostatných stránkach) -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- FAQ -->
+  <section class="faq-page">
+    <div class="container container--narrow">
+
+      <div class="faq-heading">
+        <h1>Frequently asked questions</h1>
+        <p>Buying, selling, verification, the guarantee, and payments — in plain language.</p>
+      </div>
+
+      <!-- Full-width vyhľadávanie — živé filtrovanie otázok -->
+      <form class="search search--full faq-search" role="search" aria-label="Search FAQ" onsubmit="return false">
+        <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="search__input" id="faqSearch" placeholder="Search questions…" aria-label="Search questions" autocomplete="off">
+      </form>
+
+      <!-- Zvýraznený box s najčastejšími otázkami — otvárajú sa priamo v boxe -->
+      <div class="faq-popular">
+        <h2 class="faq-popular__title">Most asked</h2>
+
+        <details class="faq-item">
+          <summary>How much can I really save?</summary>
+          <p>Discounts vary by brand and demand, typically 5–25% off face value. The exact percentage is always shown next to the card itself — never revealed for the first time at checkout.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How fast will I get my card?</summary>
+          <p>Most orders land in your wallet in under 5 minutes. You'll see a "balance verified" chip the moment it arrives, so you don't have to take our word for it.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How long does verification take?</summary>
+          <p>About 90 seconds for most people. If it ever takes longer, we'll tell you honestly instead of leaving the screen frozen on "checking."</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does CardCenter Shield actually cover?</summary>
+          <p>If a card's balance doesn't match what we told you, you get a full refund within 100 days — no partial credit, no back-and-forth.</p>
+        </details>
+      </div>
+
+      <!-- Hlásenie, keď žiadna otázka nezodpovedá hľadaniu -->
+      <p class="faq-empty" id="faqEmpty" hidden>No questions match your search.</p>
+
+      <!-- BUYING -->
+      <div class="faq-group">
+        <h2 class="faq-group__title">Buying</h2>
+
+        <details class="faq-item" id="q-save">
+          <summary>How much can I really save?</summary>
+          <p>Discounts vary by brand and demand, typically 5–25% off face value. The exact percentage is always shown next to the card itself — never revealed for the first time at checkout.</p>
+        </details>
+
+        <details class="faq-item" id="q-speed">
+          <summary>How fast will I get my card?</summary>
+          <p>Most orders land in your wallet in under 5 minutes. You'll see a "balance verified" chip the moment it arrives, so you don't have to take our word for it.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I use a discounted card anywhere the brand is accepted?</summary>
+          <p>Yes, unless a specific restriction is noted on that brand's page — we call those out clearly next to the price, never buried in fine print.</p>
+        </details>
+      </div>
+
+      <!-- SELLING -->
+      <div class="faq-group">
+        <h2 class="faq-group__title">Selling</h2>
+
+        <details class="faq-item">
+          <summary>How do you decide my offer?</summary>
+          <p>Your offer is based on the brand's resale demand and the remaining balance — shown instantly in the quote widget, before you send anything.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How long does payout take?</summary>
+          <p>Usually 1–2 business days after we verify the balance, straight to your bank account or PayPal. No minimum payout.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can a payout be reversed after I've already been paid?</summary>
+          <p>No. Once we verify a card and pay you for it, that transaction is closed — we don't claw back a payout weeks later because a buyer had an issue.</p>
+        </details>
+      </div>
+
+      <!-- VERIFICATION & TRUST -->
+      <div class="faq-group">
+        <h2 class="faq-group__title">Verification &amp; Trust</h2>
+
+        <details class="faq-item">
+          <summary>Why do you need my ID?</summary>
+          <p>Identity verification protects both buyers and sellers on real financial transactions like these — the same kind of check a bank runs before it trusts a new payee.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What do you do with my information?</summary>
+          <p>We use it only to confirm you're you, then store it securely. We never sell it.</p>
+        </details>
+
+        <details class="faq-item" id="q-verify-time">
+          <summary>How long does verification take?</summary>
+          <p>About 90 seconds for most people. If it ever takes longer, we'll tell you honestly instead of leaving the screen frozen on "checking."</p>
+        </details>
+      </div>
+
+      <!-- GUARANTEE -->
+      <div class="faq-group">
+        <h2 class="faq-group__title">Guarantee</h2>
+
+        <details class="faq-item" id="q-shield">
+          <summary>What does CardCenter Shield actually cover?</summary>
+          <p>If a card's balance doesn't match what we told you, you get a full refund within 100 days — no partial credit, no back-and-forth.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What if I don't use the card right away?</summary>
+          <p>Coverage lasts 100 days from purchase, so you have real time to actually use it, not just a same-day check.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I make a claim?</summary>
+          <p>From your wallet, open the card and select "Report an issue." You'll see a live status the whole time — submitted, reviewing, resolved — never a bare "pending" with no update.</p>
+        </details>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div class="faq-group">
+        <h2 class="faq-group__title">Payments</h2>
+
+        <details class="faq-item">
+          <summary>What payment methods do you accept?</summary>
+          <p>Major debit and credit cards for purchases. Sell-side payouts go to a bank account or PayPal.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is my payment information secure?</summary>
+          <p>Yes — payments are processed under PCI DSS standards, and we never store your full card number on our servers.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Will I get a receipt?</summary>
+          <p>Yes, emailed immediately after purchase, billed by CardCenter LLC — the same name on your card and your statement, never a second unexplained entity.</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <form class="contact-form">
+      <h2>Get in touch</h2>
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label class="field">
+        <span>Topic</span>
+        <select name="topic" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="buy">Buying a card</option>
+          <option value="sell">Selling a card</option>
+          <option value="support">Support / complaint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">Send message</button>
+    </form>
+
+    <div class="footer__contact">
+      <div>
+        <h3>CardCenter</h3>
+        <p>Trustworthy gift cards at competitive prices.</p>
+      </div>
+      <ul class="footer__details">
+        <li>San Francisco, CA, USA</li>
+        <li>+1 (415) 555-0182</li>
+        <li>support@cardcenter.cc</li>
+      </ul>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 CardCenter. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Account Settings</title>
+<meta name="description" content="Manage your CardCenter account — profile, security, payments and appearance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA (rovnaká ako na ostatných stránkach) -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ACCOUNT SETTINGS -->
+  <section class="settings-page">
+    <div class="container">
+
+      <h1 class="settings-title">Manage your account</h1>
+
+      <!-- Horný rad — Profile + Security -->
+      <div class="settings-grid">
+
+        <!-- Profile — jeden Edit pre celú kartu -->
+        <section class="settings-card">
+          <div class="settings-card__head">
+            <h2 class="settings-card__title">Profile</h2>
+            <button type="button" class="settings-btn" id="profileEdit">Edit</button>
+          </div>
+          <div class="settings-rows">
+            <div class="settings-row settings-row--plain">
+              <span class="settings-row__label">Email</span>
+              <span class="settings-row__value" id="pfEmail">aneta@outloud.co</span>
+            </div>
+            <div class="settings-row settings-row--plain">
+              <span class="settings-row__label">Phone</span>
+              <span class="settings-row__value" id="pfPhone">+421 917 623 722</span>
+            </div>
+            <div class="settings-row settings-row--plain">
+              <span class="settings-row__label">Notifications</span>
+              <span class="settings-row__value" id="pfNotif">Email alerts on</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Security -->
+        <section class="settings-card">
+          <div class="settings-card__head">
+            <h2 class="settings-card__title">Security</h2>
+          </div>
+          <div class="settings-rows">
+            <div class="settings-row">
+              <span class="settings-row__label">Password</span>
+              <span class="settings-row__value settings-row__value--dots">•••••</span>
+              <button type="button" class="settings-btn" id="passwordChange">Change</button>
+            </div>
+            <div class="settings-row">
+              <span class="settings-row__label">Authenticator App</span>
+              <span class="settings-row__value settings-row__value--muted" id="authStatus">Not connected</span>
+              <button type="button" class="settings-btn" id="authConnect">Connect</button>
+            </div>
+            <div class="settings-row">
+              <span class="settings-row__label">External Logins</span>
+              <span class="settings-row__value">0 connected</span>
+              <button type="button" class="settings-btn">Manage</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Payment methods — uložené platobné metódy -->
+      <section class="settings-card">
+        <div class="settings-card__head">
+          <h2 class="settings-card__title">Payment methods</h2>
+          <button type="button" class="settings-btn settings-btn--solid" id="pmAdd">+ Add</button>
+        </div>
+        <div class="settings-rows" id="paymentMethods">
+
+          <div class="pm-row">
+            <div class="pm-row__brand">
+              <span class="pm-row__logo">VISA</span>
+              <div class="pm-row__info">
+                <span class="pm-row__name">Visa •••• 4242</span>
+                <span class="pm-row__meta">Expires 08/28</span>
+              </div>
+            </div>
+            <span class="pm-badge">Default</span>
+            <div class="pm-row__actions">
+              <button type="button" class="icon-btn" data-pm-edit aria-label="Edit payment method" title="Edit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L18.5 9.5a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4 16v4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m13.5 6.5 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+              <button type="button" class="icon-btn" data-pm-delete aria-label="Delete payment method" title="Delete">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="pm-row">
+            <div class="pm-row__brand">
+              <span class="pm-row__logo">MC</span>
+              <div class="pm-row__info">
+                <span class="pm-row__name">Mastercard •••• 8817</span>
+                <span class="pm-row__meta">Expires 03/27</span>
+              </div>
+            </div>
+            <button type="button" class="pm-default-btn">Set default</button>
+            <div class="pm-row__actions">
+              <button type="button" class="icon-btn" data-pm-edit aria-label="Edit payment method" title="Edit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L18.5 9.5a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4 16v4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m13.5 6.5 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+              <button type="button" class="icon-btn" data-pm-delete aria-label="Delete payment method" title="Delete">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="pm-row">
+            <div class="pm-row__brand">
+              <span class="pm-row__logo">Pay</span>
+              <div class="pm-row__info">
+                <span class="pm-row__name">Apple Pay</span>
+                <span class="pm-row__meta">Connected</span>
+              </div>
+            </div>
+            <button type="button" class="pm-default-btn">Set default</button>
+            <div class="pm-row__actions">
+              <button type="button" class="icon-btn" data-pm-delete aria-label="Delete payment method" title="Delete">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="pm-row" data-pm-type="bank">
+            <div class="pm-row__brand">
+              <span class="pm-row__logo">BANK</span>
+              <div class="pm-row__info">
+                <span class="pm-row__name">Business Checking •••• 6789</span>
+                <span class="pm-row__meta">ACH bank transfer · Business Checking · +3% discount</span>
+              </div>
+            </div>
+            <button type="button" class="pm-default-btn">Set default</button>
+            <div class="pm-row__actions">
+              <button type="button" class="icon-btn" data-pm-edit aria-label="Edit payment method" title="Edit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L18.5 9.5a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4 16v4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m13.5 6.5 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+              <button type="button" class="icon-btn" data-pm-delete aria-label="Delete payment method" title="Delete">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Appearance -->
+      <section class="settings-card">
+        <div class="settings-card__head">
+          <h2 class="settings-card__title">Appearance</h2>
+        </div>
+        <div class="settings-rows">
+          <div class="settings-row">
+            <span class="settings-row__label">Color Mode</span>
+            <div class="settings-row__value">
+              <div class="segmented" id="colorMode" role="group" aria-label="Color mode">
+                <button type="button" class="segmented__btn is-active" data-mode="auto">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v18" stroke="currentColor" stroke-width="1.7"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg>
+                  <span>Auto</span>
+                </button>
+                <button type="button" class="segmented__btn" data-mode="dark">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 7 7 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                  <span>Dark</span>
+                </button>
+                <button type="button" class="segmented__btn" data-mode="light">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                  <span>Light</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <form class="contact-form">
+      <h2>Get in touch</h2>
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label class="field">
+        <span>Topic</span>
+        <select name="topic" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="buy">Buying a card</option>
+          <option value="sell">Selling a card</option>
+          <option value="support">Support / complaint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">Send message</button>
+    </form>
+
+    <div class="footer__contact">
+      <div>
+        <h3>CardCenter</h3>
+        <p>Trustworthy gift cards at competitive prices.</p>
+      </div>
+      <ul class="footer__details">
+        <li>San Francisco, CA, USA</li>
+        <li>+1 (415) 555-0182</li>
+        <li>support@cardcenter.cc</li>
+      </ul>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 CardCenter. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- Univerzálny modál pre akcie v nastaveniach (obsah dopĺňa JS) -->
+<div class="smodal" id="settingsModal" aria-hidden="true">
+  <div class="smodal__overlay" data-smodal-close></div>
+  <div class="smodal__box" role="dialog" aria-modal="true" aria-labelledby="smodalTitle">
+    <button type="button" class="smodal__close" data-smodal-close aria-label="Close">&times;</button>
+    <div class="smodal__content" id="smodalContent"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardCenter — Order Detail</title>
+<meta name="description" content="Full detail of your CardCenter order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 1. FIXNÁ NAVIGÁCIA (rovnaká ako na ostatných stránkach) -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">CardCenter</a>
+
+    <div class="nav__menu" id="navMenu">
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <div class="nav__actions-row">
+          <a href="#login" class="nav__login">Login</a>
+          <a href="cart.html" class="nav__cart" id="cartTrigger" aria-label="View cart, 0 items">
+            <svg class="nav__cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 4H5L6.2 6M6.2 6H20L18 13H7.5M6.2 6L8 15H18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9" cy="19" r="1.4" fill="currentColor"/>
+              <circle cx="17" cy="19" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="nav__cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <a href="buy.html" class="btn btn--primary nav__cta">Buy Cards</a>
+      </div>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- DETAIL OBJEDNÁVKY — obsah vykreslí JS podľa ?id= z URL -->
+  <section class="order-detail-page">
+    <div class="container container--narrow">
+      <a href="profile.html" class="cart-back order-detail__back">&lt; Back to profile</a>
+      <div id="orderDetail"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- PÄTIČKA + KONTAKT (rovnaká ako na ostatných stránkach) -->
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <form class="contact-form">
+      <h2>Get in touch</h2>
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label class="field">
+        <span>Topic</span>
+        <select name="topic" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="buy">Buying a card</option>
+          <option value="sell">Selling a card</option>
+          <option value="support">Support / complaint</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">Send message</button>
+    </form>
+
+    <div class="footer__contact">
+      <div>
+        <h3>CardCenter</h3>
+        <p>Trustworthy gift cards at competitive prices.</p>
+      </div>
+      <ul class="footer__details">
+        <li>San Francisco, CA, USA</li>
+        <li>+1 (415) 555-0182</li>
+        <li>support@cardcenter.cc</li>
+      </ul>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="buy.html">Buy Cards</a>
+        <a href="index.html#sell">Sell Cards</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© 2026 CardCenter. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

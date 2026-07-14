@@ -21,7 +21,7 @@
       <nav class="nav__links" aria-label="Main navigation">
         <a href="buy.html">Buy Cards</a>
         <a href="index.html#sell">Sell Cards</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
         <a href="index.html#contact">Contact</a>
       </nav>
 
@@ -106,14 +106,15 @@
           <!-- BOX S CENOU A VÝBEROM MNOŽSTVA -->
           <div class="price-box">
 
-            <div class="price-box__row price-box__row--custom">
-              <label class="price-box__label" for="customAmount">Custom amount</label>
-              <div class="price-box__controls">
+            <!-- Primárny: Custom amount -->
+            <div class="price-box__custom">
+              <label class="price-box__heading" for="customAmount">Custom amount</label>
+              <div class="price-box__custom-box">
                 <div class="amount-field">
                   <span class="amount-field__prefix">$</span>
                   <input type="text" id="customAmount" class="amount-field__input" value="0.00" inputmode="decimal" aria-label="Custom amount in dollars">
                 </div>
-                <div class="qty-stepper" data-qty-stepper data-min="1">
+                <div class="qty-stepper qty-stepper--lg" data-qty-stepper data-min="1">
                   <button type="button" class="qty-stepper__btn" data-qty-decrement aria-label="Decrease quantity">&minus;</button>
                   <span class="qty-stepper__value" data-qty-value>1</span>
                   <button type="button" class="qty-stepper__btn" data-qty-increment aria-label="Increase quantity">+</button>
@@ -121,7 +122,10 @@
               </div>
             </div>
 
-            <ul class="price-box__list">
+            <!-- Druhoradé: výber balíčka -->
+            <div class="price-box__packages">
+              <span class="price-box__heading">Select package</span>
+              <ul class="price-box__list">
               <li class="price-box__item">
                 <div class="price-box__info">
                   <span class="price-box__price">$25.00</span>
@@ -156,6 +160,7 @@
                 </div>
               </li>
             </ul>
+            </div>
           </div>
 
           <!-- AKČNÉ TLAČIDLÁ -->
@@ -174,21 +179,41 @@
 
       <div class="grid grid--mini">
         <a href="product.html" class="card card--mini">
+          <span class="redeem" tabindex="0" role="button" aria-label="Redemption rate 99 percent">
+            <span class="redeem__value">99%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Amazon</span>
           <span class="card__name">Amazon Gift Card</span>
           <span class="card__sold">238 sold</span>
         </a>
         <a href="product.html" class="card card--mini">
+          <span class="redeem" tabindex="0" role="button" aria-label="Redemption rate 97 percent">
+            <span class="redeem__value">97%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 97% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Target</span>
           <span class="card__name">Target Gift Card</span>
           <span class="card__sold">176 sold</span>
         </a>
         <a href="product.html" class="card card--mini">
+          <span class="redeem" tabindex="0" role="button" aria-label="Redemption rate 99 percent">
+            <span class="redeem__value">99%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 99% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Costco</span>
           <span class="card__name">Costco Gift Card</span>
           <span class="card__sold">94 sold</span>
         </a>
         <a href="product.html" class="card card--mini">
+          <span class="redeem" tabindex="0" role="button" aria-label="Redemption rate 98 percent">
+            <span class="redeem__value">98%</span>
+            <span class="redeem__tip" role="tooltip">Redemption rate: 98% of buyers used this card with no issues reported.</span>
+          </span>
+
           <span class="card__logo">Adidas</span>
           <span class="card__name">Adidas Gift Card</span>
           <span class="card__sold">152 sold</span>
@@ -265,7 +290,7 @@
       <nav class="footer__links" aria-label="Footer links">
         <a href="buy.html">Buy Cards</a>
         <a href="index.html#sell">Sell Cards</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
       </nav>
     </div>
   </div>
