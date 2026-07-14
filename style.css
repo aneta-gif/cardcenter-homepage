@@ -3254,17 +3254,17 @@ body.modal-open {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
 /* Jeden riadok objednávky — mriežka s pevnými stĺpcami, aby sa Status,
    Items a Total zarovnali pod sebou naprieč všetkými riadkami; CTAs vpravo */
 .order-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 120px 80px 110px auto;
+  grid-template-columns: minmax(0, 1fr) 96px 72px 104px 272px;
   align-items: center;
-  gap: 24px;
-  padding: 20px 24px;
+  gap: 40px;
+  padding: 24px 28px;
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   background: #fff;
@@ -4068,11 +4068,17 @@ body.modal-open {
 /* Uložené platobné metódy (settings.html → Payment methods) */
 .pm-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) 110px 96px;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   padding: 16px 0;
   border-top: 1px solid var(--c-bg-light);
+}
+
+/* Default badge aj „Set default" začínajú na rovnakej pozícii (zarovnané) */
+.pm-badge,
+.pm-default-btn {
+  justify-self: start;
 }
 
 .pm-row:first-child {

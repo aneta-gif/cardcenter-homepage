@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBrandSearch();
   initShowMoreCategories();
   initCategorySearch();
+  initCatalogPreselect();
   initSortTabs();
   initQtySteppers();
   initCustomAmountInput();
@@ -219,6 +220,41 @@ function initShowMoreCategories() {
   });
 }
 
+// Predvýber v katalógu (buy.html) podľa ?category= / ?brand= z homepage.
+// Kategóriu zaškrtne vo filtri, značku vyplní do vyhľadávania a odfiltruje karty.
+function initCatalogPreselect() {
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+  const brand = params.get("brand");
+  if (!category && !brand) return;
+
+  // Kategória → zaškrtne zodpovedajúci checkbox (aj skrytú „extra" odhalí)
+  if (category) {
+    const list = document.getElementById("categoryList");
+    if (list) {
+      const wanted = category.trim().toLowerCase();
+      list.querySelectorAll(".checklist__item").forEach((item) => {
+        const label = item.textContent.trim().toLowerCase();
+        if (label.startsWith(wanted)) {
+          const cb = item.querySelector('input[type="checkbox"]');
+          if (cb) cb.checked = true;
+          item.classList.add("is-visible");
+        }
+      });
+    }
+  }
+
+  // Značka → vyplní hlavné vyhľadávanie a spustí filtrovanie kariet
+  if (brand) {
+    const input = document.querySelector(".search__input");
+    const form = document.querySelector(".search");
+    if (input && form) {
+      input.value = brand;
+      form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    }
+  }
+}
+
 // Živé vyhľadávanie v zozname kategórií (buy.html)
 function initCategorySearch() {
   const input = document.getElementById("categorySearch");
@@ -364,7 +400,7 @@ function getSelectedQuantity() {
   const customAmount = parseFloat(customInput?.value || "0");
 
   if (customInput && customAmount > 0) {
-    const customStepper = customInput.closest(".price-box__row--custom")?.querySelector("[data-qty-stepper]");
+    const customStepper = customInput.closest(".price-box__custom")?.querySelector("[data-qty-stepper]");
     total += Number(customStepper?.querySelector("[data-qty-value]")?.textContent || 1);
   }
 
@@ -426,9 +462,128 @@ function initModal() {
 // Autentifikačný modál (cart.html) — plynulé prepínanie Login / Sign Up
 // ==========================================================================
 
+// Markup prihlasovacieho modálu (login / sign up) — vkladá sa na stránky,
+// ktoré ho ešte nemajú, aby „Login" v menu fungoval všade rovnako
+const AUTH_MODAL_HTML = `
+  <div class="modal modal--auth" id="authModal" data-auth-mode="login" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box auth" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
+
+      <div class="auth__header">
+        <span class="auth__lock" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="#fff" stroke-width="1.7"/>
+            <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <h2 id="authTitle" class="auth__title">Log in or create an account</h2>
+        <p class="auth__text">Sign in to track your orders, manage alerts and unlock exclusive rewards. New here? Create an account in seconds.</p>
+      </div>
+
+      <div class="auth__toggle" role="tablist" aria-label="Authentication mode">
+        <button type="button" class="auth__toggle-btn is-active" data-auth-switch="login" role="tab" aria-selected="true">Login</button>
+        <button type="button" class="auth__toggle-btn" data-auth-switch="signup" role="tab" aria-selected="false">Sign Up</button>
+      </div>
+
+      <form class="auth-form" id="authForm" novalidate>
+        <label class="field auth-field auth-signup-field">
+          <span>Name</span>
+          <input type="text" name="name" placeholder="Your full name" autocomplete="name">
+        </label>
+
+        <label class="field auth-field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@email.com" autocomplete="email">
+        </label>
+
+        <label class="field auth-field auth-signup-field">
+          <span>Phone Number</span>
+          <input type="tel" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+          <span class="field__hint">We'll use this number to help keep your account secure by sending verification texts or calls when needed.</span>
+        </label>
+
+        <label class="field auth-field">
+          <span>Password</span>
+          <div class="pwd-field">
+            <input type="password" name="password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="pwd-toggle" data-pwd-toggle aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <a href="#" class="auth__forgot auth-login-field">Forgot password?</a>
+
+        <label class="field auth-field auth-signup-field">
+          <span>Confirm Password</span>
+          <div class="pwd-field">
+            <input type="password" name="confirmPassword" placeholder="••••••••" autocomplete="new-password">
+            <button type="button" class="pwd-toggle" data-pwd-toggle aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <label class="auth-check auth-signup-field">
+          <input type="checkbox" name="notifications">
+          <span class="auth-check__box" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12.5L9.5 17L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="auth-check__label">Send me email alerts when new deals are posted</span>
+        </label>
+
+        <label class="field auth-field auth-signup-field">
+          <span>Referred by</span>
+          <input type="text" name="referredBy" placeholder="Friend, social media, search…">
+          <span class="field__hint">Please tell us how you heard about CardCenter.</span>
+        </label>
+
+        <button type="submit" class="auth__submit" id="authSubmit">Log In &amp; Continue</button>
+      </form>
+
+      <p class="auth__legal">By continuing you agree to our Terms of Service and Privacy Policy.</p>
+
+      <div class="auth-verify" aria-hidden="true">
+        <span class="auth__lock" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3L5 6v5.5c0 4.2 2.9 7.4 7 8.5 4.1-1.1 7-4.3 7-8.5V6l-7-3Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <h2 class="auth__title">Account Verification</h2>
+        <p class="auth__text">To ensure maximum security and protect your digital assets, we require a quick verification setup. This adds an extra layer of protection to your account and prevents unauthorized access.</p>
+
+        <div class="auth-qr" aria-hidden="true">
+          <div class="auth-qr__grid">
+            <span class="auth-qr__eye auth-qr__eye--tl"></span>
+            <span class="auth-qr__eye auth-qr__eye--tr"></span>
+            <span class="auth-qr__eye auth-qr__eye--bl"></span>
+          </div>
+        </div>
+
+        <button type="button" class="auth__submit" id="authVerifyBtn">Continue</button>
+      </div>
+    </div>
+  </div>`;
+
+// Ak stránka nemá prihlasovací modál, vložíme ho do DOM
+function ensureAuthModal() {
+  if (document.getElementById("authModal")) return;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = AUTH_MODAL_HTML.trim();
+  document.body.appendChild(wrap.firstElementChild);
+}
+
 function initAuthModal() {
+  ensureAuthModal();
   const modal = document.getElementById("authModal");
   if (!modal) return;
+
+  // Kontext otvorenia: "nav" (z menu) alebo "checkout" (z tlačidla v košíku)
+  let openContext = "nav";
 
   const box = modal.querySelector(".modal__box");
   const submitBtn = modal.querySelector("#authSubmit");
@@ -470,6 +625,7 @@ function initAuthModal() {
   document.querySelectorAll(".nav__login").forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
+      openContext = "nav";
       switchAuthMode("login");
       openModal(modal);
     });
@@ -485,6 +641,7 @@ function initAuthModal() {
       }
       // Inak checkout vyžaduje účet — modál resetujeme a otvoríme ako prvé
       // v režime prihlásenia (aj po predchádzajúcom Sign Up / verifikácii)
+      openContext = "checkout";
       switchAuthMode("login");
       openModal(modal);
     });
@@ -513,8 +670,19 @@ function initAuthModal() {
     setLoggedIn(name, email);
   }
 
+  // Dokončenie prihlásenia/registrácie — z checkoutu ideme na platby,
+  // z menu len obnovíme stránku, aby sa zobrazil profilový odznak
+  function completeAuth() {
+    saveAuthFromForm();
+    if (openContext === "checkout") {
+      window.location.href = "checkout.html";
+    } else {
+      window.location.reload();
+    }
+  }
+
   // Odoslanie formulára — v registrácii pokračuje na verifikáciu,
-  // pri úspešnom prihlásení uloží stav a presmeruje na platobné metódy
+  // pri úspešnom prihlásení dokončí prihlásenie
   const form = modal.querySelector("#authForm");
   if (form) {
     form.addEventListener("submit", (event) => {
@@ -522,20 +690,15 @@ function initAuthModal() {
       if (modal.getAttribute("data-auth-mode") === "signup") {
         goToVerification();
       } else {
-        // Prihlásenie prebehlo úspešne — uložíme profil a prejdeme na platby
-        saveAuthFromForm();
-        window.location.href = "checkout.html";
+        completeAuth();
       }
     });
   }
 
-  // Záverečné tlačidlo vo verifikácii — dokončí registráciu a presmeruje na platby
+  // Záverečné tlačidlo vo verifikácii — dokončí registráciu
   const verifyBtn = modal.querySelector("#authVerifyBtn");
   if (verifyBtn) {
-    verifyBtn.addEventListener("click", () => {
-      saveAuthFromForm();
-      window.location.href = "checkout.html";
-    });
+    verifyBtn.addEventListener("click", completeAuth);
   }
 
   // Predvolený štart v režime prihlásenia (vypne polia registrácie)
