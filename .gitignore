@@ -1,3 +1,7 @@
 .DS_Store
 .vercel
 node_modules
+
+# Lokálny config len pre samostatný Vercel deploy Buy-2 (V2 na root).
+# Nesmie ísť do repa, inak by prepísal root aj hlavnému webu.
+vercel.json
