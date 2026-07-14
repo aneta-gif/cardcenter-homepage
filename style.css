@@ -4490,6 +4490,16 @@ body.modal-open {
   line-height: 1;
 }
 
+/* Inline variant — v riadku s názvom produktu (nie v rohu karty) */
+.redeem--inline {
+  position: relative;
+  top: auto;
+  right: auto;
+  align-self: center;
+  width: 42px;
+  height: 42px;
+}
+
 /* Vysvetľujúci tooltip — zobrazí sa pri hover/focus */
 .redeem__tip {
   position: absolute;
